@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151126">
+  <meta name="description" content="بوابة التسجيل الإلكتروني">
+  <title>بوابة التسجيل | Registration Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="الصفحة الرئيسية"><span class="brand-mark">R</span><span><b>REGISTRATION</b><small>بوابة التسجيل الإلكتروني</small></span></a>
+    <span class="secure"><i></i> نموذج تسجيل إلكتروني</span>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div class="eyebrow"><span></span> ONLINE REGISTRATION</div>
+      <h1>ابدأ رحلتك <em>من هنا.</em></h1>
+      <p>املأ البيانات المطلوبة بعناية. راجع إجاباتك قبل الإرسال للتأكد من صحتها.</p>
+      <div class="trust-row"><span>✦ واجهة سهلة</span><span>✦ خطوات واضحة</span><span>✦ إرسال آمن عبر Google Forms بعد ضبط الربط</span></div>
+    </section>
+
+    <section class="form-card" aria-labelledby="form-title">
+      <div class="card-head">
+        <div><div class="step-label">REGISTRATION FORM</div><h2 id="form-title">بيانات التسجيل</h2><p>الحقول المعلّمة بنجمة مطلوبة.</p></div>
+        <div class="form-icon" aria-hidden="true">✧</div>
+      </div>
+      <div class="progress-wrap"><div class="progress-meta"><span id="progress-text">الخطوة 1 من 2</span><span id="progress-percent">50%</span></div><div class="progress-track"><span id="progress-bar"></span></div></div>
+
+      <form id="registration-form" novalidate>
+        <section class="form-step active" data-step="0">
+          <div class="section-title"><span>01</span><div><h3>المعلومات الأساسية</h3><p>بيانات التواصل والتعريف الأساسية</p></div></div>
+          <div class="field-grid">
+            <label class="field full"><span>الاسم بالكامل <b>*</b></span><input name="fullName" autocomplete="name" placeholder="اكتب الاسم كما تحب أن يظهر" required maxlength="100"><small class="error"></small></label>
+            <label class="field"><span>البريد الإلكتروني <b>*</b></span><input name="email" type="email" autocomplete="email" placeholder="name@example.com" required><small class="error"></small></label>
+            <label class="field"><span>رقم الهاتف <b>*</b></span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01xxxxxxxxx" required maxlength="20"><small class="error"></small></label>
+            <label class="field"><span>المحافظة</span><select name="governorate"><option value="">اختر المحافظة</option><option>القاهرة</option><option>الإسكندرية</option><option>كفر الشيخ</option><option>البحيرة</option><option>الغربية</option><option>الدقهلية</option><option>الشرقية</option><option>الجيزة</option><option>أخرى</option></select><small class="error"></small></label>
+            <label class="field"><span>المرحلة الدراسية</span><select name="education"><option value="">اختر المرحلة</option><option>إعدادي</option><option>ثانوي</option><option>جامعي</option><option>أخرى</option></select><small class="error"></small></label>
+          </div>
+        </section>
+
+        <section class="form-step" data-step="1">
+          <div class="section-title"><span>02</span><div><h3>معلومات إضافية</h3><p>أكمل البيانات الاختيارية ثم راجع طلبك</p></div></div>
+          <div class="field-grid">
+            <label class="field full"><span>اسم المدرسة أو المؤسسة</span><input name="school" placeholder="اكتب اسم المدرسة أو المؤسسة" maxlength="120"><small class="error"></small></label>
+            <label class="field full"><span>ملاحظات إضافية</span><textarea name="notes" rows="4" placeholder="هل هناك أي معلومات تحب إضافتها؟" maxlength="600"></textarea><small class="hint">لا تكتب كلمات مرور أو بيانات مالية أو معلومات شخصية حساسة.</small></label>
+          </div>
+          <div class="review-note"><span>✓</span><p>بمتابعة الإرسال، تأكد أنك أدخلت بيانات صحيحة وأنك تملك الإذن اللازم لمشاركتها.</p></div>
+        </section>
+
+        <div class="form-alert" id="form-alert" role="status" aria-live="polite"></div>
+        <div class="actions"><button type="button" class="btn btn-ghost" id="back-btn" disabled>رجوع</button><button type="button" class="btn btn-primary" id="next-btn">التالي <span>←</span></button><button type="submit" class="btn btn-primary" id="submit-btn" hidden>إرسال التسجيل <span>✓</span></button></div>
+      </form>
+      <div class="footnote">Registration Portal <span>•</span> Powered by Google Forms &amp; Sheets</div>
+    </section>
+    <footer>© <span id="year"></span> Registration Portal. جميع الحقوق محفوظة.</footer>
+  </main>
+</body>
+</html>
