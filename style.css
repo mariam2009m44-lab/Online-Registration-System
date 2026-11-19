@@ -80,3 +80,6 @@ body{background:#f6f3f3!important;color:#282426!important}
 .admin-panel th{background:#fbf0f1!important;color:#821d28!important}
 .status{background:#fbf0f1!important;color:#821d28!important}
 @media(max-width:560px){.site-header{margin:0 8px 12px;padding:10px;border-radius:0 0 10px 10px}.identity{gap:9px}.school-logo{width:55px;height:55px}.identity h1{font-size:16px}.identity h2{font-size:12px}.identity p{font-size:11px}}
+
+/* Match registration identity */
+body{font-family:"Cairo",Tahoma,Arial,sans-serif!important;background:#f6f3f3!important}
