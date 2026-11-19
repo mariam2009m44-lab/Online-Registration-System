@@ -104,3 +104,9 @@ body.registration-app{margin:0;min-height:100vh;background:var(--page)!important
  .section-heading h2{font-size:14px}
  .upload-grid{grid-template-columns:1fr}
 }
+
+/* Typography and clean header refinements */
+body.registration-app,.registration-app button,.registration-app input,.registration-app select,.registration-app textarea{font-family:"Cairo",Tahoma,Arial,sans-serif!important}
+.brand{gap:0}
+.topbar{min-height:86px}
+@media(max-width:680px){.topbar{min-height:64px}.brand{width:100%}.brand strong{font-size:17px}.brand small{font-size:11px}}
