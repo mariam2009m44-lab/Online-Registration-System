@@ -2,98 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#861f2b">
-<title>التسجيل الإلكتروني | مدرسة بي مينزيت</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="theme-color" content="#821d28">
+<title>استمارة التسجيل | مدرسة بي مينزيت</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-clean1">
-<script src="script.js?v=20261120-clean1" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-reference2"><script src="script.js?v=20261120-reference2" defer></script>
 </head>
-<body class="registration-app">
-<div class="app-shell">
-<header class="topbar">
-<a class="brand" href="index.html"><span><strong>مدرسة بي مينزيت</strong><small>للألحان والطقوس الكنسية</small><small class="church-name">كنيسة ماريوحنا الحبيب - بهتيم</small></span></a>
-
-</header>
+<body class="registration-app"><div class="app-shell">
+<header class="topbar"><div class="brand"><span><strong>مدرسة بي مينزيت للألحان والطقوس الكنسية</strong><small>كنيسة ماريوحنا الحبيب - بهتيم</small></span></div><span class="topbar-mark">استمارة الالتحاق</span></header>
 <main class="main-content">
-<section class="intro-card"><div class="eyebrow">نظام التسجيل الإلكتروني</div><h1>استمارة الالتحاق بالمدرسة</h1><p>يرجى إدخال البيانات بدقة، ويمكنك الرجوع للخطوات السابقة قبل إرسال الطلب.</p></section>
-<nav class="stepper" aria-label="مراحل التسجيل">
-<div class="progress-track"><span id="progress-fill"></span></div>
-<ol>
-<li class="step active" data-step-indicator="0"><span>١</span><small>البيانات الشخصية</small></li>
-<li class="step" data-step-indicator="1"><span>٢</span><small>البيانات الكنسية</small></li>
-<li class="step" data-step-indicator="2"><span>٣</span><small>التعليم</small></li>
-<li class="step" data-step-indicator="3"><span>٤</span><small>الخبرات</small></li>
-<li class="step" data-step-indicator="4"><span>٥</span><small>الملفات</small></li>
-<li class="step" data-step-indicator="5"><span>٦</span><small>المراجعة</small></li>
-</ol>
-<div class="step-counter"><span id="step-number">الخطوة ١ من ٦</span><span id="progress-percent">١٧٪</span></div>
-</nav>
+<section class="intro-card"><div class="eyebrow">نظام التسجيل الإلكتروني</div><h1>استمارة الالتحاق بالمدرسة</h1><p>يرجى استكمال البيانات بدقة، ويمكنك الرجوع إلى الخطوات السابقة قبل الإرسال.</p></section>
+<nav class="stepper" aria-label="مراحل التسجيل"><div class="progress-track"><span id="progress-fill"></span></div><ol>
+<li class="step active" data-step-indicator="0"><span>١</span><small>البيانات الأساسية</small></li><li class="step" data-step-indicator="1"><span>٢</span><small>الدراسة</small></li><li class="step" data-step-indicator="2"><span>٣</span><small>الخبرات</small></li><li class="step" data-step-indicator="3"><span>٤</span><small>المرفقات</small></li><li class="step" data-step-indicator="4"><span>٥</span><small>ملخص الكنيسة</small></li><li class="step" data-step-indicator="5"><span>٦</span><small>المراجعة</small></li></ol><div class="step-counter"><span id="step-number">الخطوة ١ من ٦</span><span id="progress-percent">١٧٪</span></div></nav>
 <form id="registration-form" novalidate>
 <section class="form-step active" data-step="0">
-<div class="section-heading"><span class="section-icon">01</span><div><h2>البيانات الشخصية</h2><p>Personal Information</p></div></div>
-<div class="fields-grid">
-<label class="field full"><span>الاسم رباعي <b>*</b></span><input name="fullName" autocomplete="name" required maxlength="150" placeholder="اكتب الاسم رباعي"></label>
-<label class="field"><span>البريد الإلكتروني <b>*</b></span><input name="email" type="email" autocomplete="email" required placeholder="example@email.com"></label>
-<label class="field"><span>الرقم القومي <b>*</b></span><input name="nationalId" inputmode="numeric" maxlength="14" minlength="14" required placeholder="14 رقمًا"></label>
-<label class="field"><span>تاريخ الميلاد <b>*</b></span><input name="birthDate" type="date" required></label>
-<label class="field"><span>النوع <b>*</b></span><select name="gender" required><option value="">اختر النوع</option><option>ذكر</option><option>أنثى</option></select></label>
-<label class="field"><span>المحافظة <b>*</b></span><select name="governorate" required><option value="">اختر المحافظة</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>القليوبية</option><option>كفر الشيخ</option><option>الغربية</option><option>البحيرة</option><option>الدقهلية</option><option>الشرقية</option><option>أخرى</option></select></label>
-<label class="field"><span>المدينة / المركز <b>*</b></span><input name="city" required placeholder="المدينة أو المركز"></label>
-<label class="field"><span>رقم الهاتف (واتساب) <b>*</b></span><input name="phone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
-</div>
+<div class="section-heading"><span class="section-icon">١</span><div><h2>البيانات الشخصية والكنسية</h2><p>Personal &amp; Church Information</p></div></div>
+<div class="reference-columns">
+<div class="reference-column"><section class="reference-section"><div class="reference-section-title">✦ البيانات الشخصية</div><div class="reference-fields">
+<label class="reference-field"><span class="field-icon">♙</span><span class="field-name">الاسم رباعي <small>كما هو بالمستندات</small></span><span class="field-control"><input name="fullName" autocomplete="name" required maxlength="150" placeholder="الاسم رباعي"></span></label>
+<label class="reference-field"><span class="field-icon">✉</span><span class="field-name">البريد الإلكتروني</span><span class="field-control"><input name="email" type="email" autocomplete="email" required placeholder="example@email.com"></span></label>
+<label class="reference-field"><span class="field-icon">▤</span><span class="field-name">الرقم القومي</span><span class="field-control"><input name="nationalId" inputmode="numeric" maxlength="14" minlength="14" required placeholder="١٤ رقمًا"></span></label>
+<label class="reference-field"><span class="field-icon">▦</span><span class="field-name">تاريخ الميلاد</span><span class="field-control"><input name="birthDate" type="date" required></span></label>
+<label class="reference-field"><span class="field-icon">◉</span><span class="field-name">النوع</span><span class="field-control"><select name="gender" required><option value="">اختر النوع</option><option>ذكر</option><option>أنثى</option></select></span></label>
+<label class="reference-field"><span class="field-icon">⌖</span><span class="field-name">المحافظة</span><span class="field-control"><select name="governorate" required><option value="">اختر المحافظة</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>القليوبية</option><option>كفر الشيخ</option><option>الغربية</option><option>البحيرة</option><option>الدقهلية</option><option>الشرقية</option><option>أخرى</option></select></span></label>
+<label class="reference-field"><span class="field-icon">⌂</span><span class="field-name">المدينة / المركز</span><span class="field-control"><input name="city" required placeholder="المدينة أو المركز"></span></label>
+<label class="reference-field"><span class="field-icon">☎</span><span class="field-name">رقم الهاتف (واتساب)</span><span class="field-control"><input name="phone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></span></label>
+</div></section></div>
+<div class="reference-column"><section class="reference-section church-section"><div class="reference-section-title">✝ البيانات الكنسية</div><div class="reference-fields church-fields">
+<label class="reference-field"><span class="field-icon">♧</span><span class="field-name">الإيبارشية</span><span class="field-control"><input name="diocese" required placeholder="اسم الإيبارشية"></span></label>
+<label class="reference-field"><span class="field-icon">⛪</span><span class="field-name">اسم الكنيسة التابع لها</span><span class="field-control"><input name="church" required placeholder="اسم الكنيسة"></span></label>
+<label class="reference-field"><span class="field-icon">✟</span><span class="field-name">اسم أب الاعتراف</span><span class="field-control"><input name="confessor" required placeholder="اسم أب الاعتراف"></span></label>
+<label class="reference-field"><span class="field-icon">♬</span><span class="field-name">الخدمة الحالية</span><span class="field-control"><input name="currentService" placeholder="إن وجدت"></span></label>
+</div><div class="summary-note">يرجى كتابة البيانات الكنسية بدقة لمساعدة إدارة المدرسة في تنظيم التواصل ومراجعة الطلب.</div></section></div></div>
 </section>
-<section class="form-step" data-step="1" hidden>
-<div class="section-heading"><span class="section-icon">02</span><div><h2>البيانات الكنسية والروحية</h2><p>Church Information</p></div></div>
-<div class="fields-grid">
-<label class="field"><span>الإيبارشية <b>*</b></span><input name="diocese" required placeholder="اسم الإيبارشية"></label>
-<label class="field"><span>اسم الكنيسة التابع لها <b>*</b></span><input name="church" required placeholder="اسم الكنيسة"></label>
-<label class="field"><span>اسم أب الاعتراف <b>*</b></span><input name="confessor" required placeholder="اسم أب الاعتراف"></label>
-<label class="field"><span>الخدمة الحالية (إن وجدت)</span><input name="currentService" placeholder="الخدمة الحالية"></label>
-</div>
-<div class="info-note">تُستخدم هذه البيانات للتأكد من الانتماء الكنسي وتنظيم التواصل مع المتقدمين.</div>
-</section>
-<section class="form-step" data-step="2" hidden>
-<div class="section-heading"><span class="section-icon">03</span><div><h2>البيانات التعليمية والدراسية</h2><p>Education</p></div></div>
-<div class="fields-grid">
+<section class="form-step" data-step="1" hidden><div class="section-heading"><span class="section-icon">٢</span><div><h2>البيانات التعليمية والدراسية</h2><p>Education Information</p></div></div><section class="reference-section"><div class="reference-section-title">▤ المؤهل والمرحلة الدراسية</div><div class="fields-grid">
 <label class="field"><span>المرحلة الدراسية / السنة <b>*</b></span><select name="educationLevel" required><option value="">اختر المرحلة</option><option>ابتدائي</option><option>إعدادي</option><option>ثانوي</option><option>جامعي</option><option>خريج</option></select></label>
-<label class="field"><span>اسم المدرسة / الجامعة</span><input name="institution" placeholder="اسم المؤسسة التعليمية"></label>
-<label class="field"><span>الكلية / التخصص</span><input name="faculty" placeholder="الكلية أو التخصص"></label>
-<label class="field"><span>السنة الدراسية الجامعية</span><select name="universityYear"><option value="">اختر إن وجد</option><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option><option>دراسات عليا</option></select></label>
-</div>
-</section>
-<section class="form-step" data-step="3" hidden>
-<div class="section-heading"><span class="section-icon">04</span><div><h2>الدراسات والخبرات والمواهب</h2><p>Studies, Experience &amp; Skills</p></div></div>
-<div class="fields-grid">
-<label class="field full"><span>الدراسات أو الدورات السابقة</span><textarea name="studies" rows="3" placeholder="اذكر الدراسات أو الدورات ذات الصلة"></textarea></label>
-<label class="field"><span>المواهب الخاصة</span><textarea name="talents" rows="3" placeholder="ألحان، ترانيم، عزف، وغيرها"></textarea></label>
-<label class="field"><span>المهارات الشخصية أو التقنية</span><textarea name="skills" rows="3" placeholder="تنظيم، تصميم، قيادة، وغيرها"></textarea></label>
-<label class="field"><span>مستواك في الألحان</span><select name="chantLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label>
-<label class="field"><span>مستواك في اللغة القبطية</span><select name="copticLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label>
-<label class="field"><span>مستواك في الطقس</span><select name="ritualLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label>
-</div>
-</section>
-<section class="form-step" data-step="4" hidden>
-<div class="section-heading"><span class="section-icon">05</span><div><h2>رفع الملفات والمستندات</h2><p>Required Documents</p></div></div>
-<div class="info-note warning">قسم الملفات جاهز من ناحية التصميم. ربط رفع الملفات الفعلي يحتاج تحديد طريقة التخزين؛ رفع الملفات في Google Forms يتطلب عادةً تسجيل الدخول بحساب Google.</div>
-<div class="upload-grid">
-<label class="upload-card"><span class="upload-symbol">▧</span><strong>الصورة الشخصية</strong><small>صورة واضحة للمتقدم</small><input type="file" name="profilePhoto" accept="image/*"></label>
-<label class="upload-card"><span class="upload-symbol">▤</span><strong>شهادة الميلاد</strong><small>صورة أو PDF</small><input type="file" name="birthCertificate" accept="image/*,.pdf"></label>
-<label class="upload-card"><span class="upload-symbol">▤</span><strong>الرقم القومي</strong><small>صورة أو PDF</small><input type="file" name="nationalIdFile" accept="image/*,.pdf"></label>
-<label class="upload-card"><span class="upload-symbol">＋</span><strong>مستندات أخرى</strong><small>شهادات أو إثباتات إضافية</small><input type="file" name="otherFiles" accept="image/*,.pdf" multiple></label>
-</div>
-</section>
-<section class="form-step" data-step="5" hidden>
-<div class="section-heading"><span class="section-icon">06</span><div><h2>مراجعة البيانات وإرسال الطلب</h2><p>Review &amp; Submit</p></div></div>
-<p class="review-intro">راجِع البيانات التالية قبل الإرسال. يمكنك الرجوع إلى أي خطوة لتعديلها.</p>
-<div id="review-summary" class="review-grid"></div>
-<div class="declaration"><h3>التعهد والإقرار</h3><p>أقر بصحة البيانات التي أدخلتها وأتعهد بالالتزام بقواعد المدرسة ولوائحها.</p><label><input type="checkbox" name="consent" required> أوافق على الشروط والأحكام وأقر بصحة البيانات المقدمة. <b>*</b></label></div>
-<div class="info-note warning" id="integration-notice">لن يتم إرسال البيانات فعليًا حتى يتم ربط النموذج بنموذج Google Forms الخاص بالمدرسة.</div>
-</section>
-<div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div>
-<div class="form-actions"><button type="button" class="btn btn-back" id="prev-step" disabled>السابق</button><span class="secure-note">بيانات التسجيل سرية وتُستخدم لأغراض المدرسة</span><button type="button" class="btn btn-next" id="next-step">التالي</button><button type="submit" class="btn btn-submit" id="submit-form" hidden>إرسال طلب التسجيل</button></div>
-</form>
-</main>
-<footer class="site-footer">مدرسة بي مينزيت للألحان والطقوس الكنسية <span>✝</span> نظام التسجيل الإلكتروني</footer>
-</div>
-</body></html>
+<label class="field"><span>اسم المدرسة / الجامعة</span><input name="institution" placeholder="اسم المؤسسة التعليمية"></label><label class="field"><span>الكلية / التخصص</span><input name="faculty" placeholder="الكلية أو التخصص"></label><label class="field"><span>السنة الدراسية الجامعية</span><select name="universityYear"><option value="">اختر إن وجد</option><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option><option>دراسات عليا</option></select></label></div></section></section>
+<section class="form-step" data-step="2" hidden><div class="section-heading"><span class="section-icon">٣</span><div><h2>الدراسات والخبرات والمواهب</h2><p>Studies, Experience &amp; Skills</p></div></div><section class="reference-section"><div class="reference-section-title">✦ المهارات والمستويات</div><div class="fields-grid">
+<label class="field full"><span>الدراسات أو الدورات السابقة</span><textarea name="studies" rows="3" placeholder="اذكر الدراسات أو الدورات ذات الصلة"></textarea></label><label class="field"><span>المواهب الخاصة</span><textarea name="talents" rows="3" placeholder="ألحان، ترانيم، عزف، وغيرها"></textarea></label><label class="field"><span>المهارات الشخصية أو التقنية</span><textarea name="skills" rows="3" placeholder="تنظيم، تصميم، قيادة، وغيرها"></textarea></label>
+<label class="field"><span>مستواك في الألحان</span><select name="chantLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label><label class="field"><span>مستواك في اللغة القبطية</span><select name="copticLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label><label class="field"><span>مستواك في الطقس</span><select name="ritualLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label></div></section></section>
+<section class="form-step" data-step="3" hidden><div class="section-heading"><span class="section-icon">٤</span><div><h2>رفع الملفات والمستندات</h2><p>Documents &amp; Attachments</p></div></div><div class="info-note warning">اختيار الملفات هنا للمعاينة داخل النموذج فقط. لم يتم إعداد تخزين آمن أو ربط رفع الملفات بعد.</div><div class="upload-grid">
+<label class="upload-card"><span class="upload-symbol">▧</span><strong>الصورة الشخصية</strong><small>صورة واضحة للمتقدم</small><input type="file" name="profilePhoto" accept="image/*"></label><label class="upload-card"><span class="upload-symbol">▤</span><strong>شهادة الميلاد</strong><small>صورة أو PDF</small><input type="file" name="birthCertificate" accept="image/*,.pdf"></label><label class="upload-card"><span class="upload-symbol">▤</span><strong>الرقم القومي</strong><small>صورة أو PDF</small><input type="file" name="nationalIdFile" accept="image/*,.pdf"></label><label class="upload-card"><span class="upload-symbol">＋</span><strong>مستندات أخرى</strong><small>شهادات أو إثباتات إضافية</small><input type="file" name="otherFiles" accept="image/*,.pdf" multiple></label></div></section>
+<section class="form-step" data-step="4" hidden><div class="section-heading"><span class="section-icon">٥</span><div><h2>ملخص بيانات الكنيسة</h2><p>Church Details Summary</p></div></div><section class="reference-section church-summary"><h3>بيانات التواصل والانتماء الكنسي</h3><div class="summary-row"><b>✝</b><span>الإيبارشية</span><strong id="church-diocese">يُستكمل من بياناتك</strong></div><div class="summary-row"><b>⛪</b><span>الكنيسة</span><strong id="church-name">يُستكمل من بياناتك</strong></div><div class="summary-row"><b>✟</b><span>أب الاعتراف</span><strong id="church-confessor">يُستكمل من بياناتك</strong></div><div class="summary-row"><b>♬</b><span>الخدمة الحالية</span><strong id="church-service">يُستكمل من بياناتك</strong></div></section>
+<section class="reference-section conditions-section"><h3 class="conditions-heading">شروط وتعليمات التسجيل</h3><div class="condition-row"><span>١</span><b>صحة البيانات</b><strong>تأكد من كتابة البيانات بشكل صحيح ومطابق للمستندات.</strong></div><div class="condition-row"><span>٢</span><b>المستندات</b><strong>تجهيز المستندات المطلوبة وفق تعليمات إدارة المدرسة.</strong></div><div class="condition-row"><span>٣</span><b>مراجعة الطلب</b><strong>إرسال الطلب لا يعني القبول النهائي، ويخضع للمراجعة.</strong></div></section>
+<section class="reference-section notes-section"><h3 class="notes-heading">ملاحظات مهمة</h3><ul><li>يرجى مراجعة جميع البيانات قبل إرسال الطلب.</li><li>لا ترسل مستنداتك الحساسة عبر هذه النسخة قبل تفعيل وسيلة رفع آمنة.</li><li>سيتم الإعلان عن خطوات المتابعة من خلال إدارة المدرسة.</li></ul></section></section>
+<section class="form-step" data-step="5" hidden><div class="section-heading"><span class="section-icon">٦</span><div><h2>مراجعة البيانات وإرسال الطلب</h2><p>Review &amp; Submit</p></div></div><p class="review-intro">راجِع البيانات التالية قبل الإرسال، ويمكنك الرجوع لأي خطوة لتعديلها.</p><div id="review-summary" class="review-grid"></div><div class="declaration"><h3>التعهد والإقرار</h3><p>أقر بصحة البيانات التي أدخلتها وأتعهد بالالتزام بقواعد المدرسة ولوائحها.</p><label><input type="checkbox" name="consent" required> أوافق على الشروط وأقر بصحة البيانات المقدمة. <b>*</b></label></div><div class="info-note warning" id="integration-notice">الإرسال الإلكتروني غير مفعّل بعد؛ لم يتم ربط Google Forms أو قاعدة بيانات. لن تُرسل بياناتك من هذه الصفحة.</div></section>
+<div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div><div class="form-actions"><button type="button" class="btn btn-back" id="prev-step" disabled>السابق</button><span class="secure-note">لا تُرسل بيانات فعلية قبل تفعيل الربط الآمن</span><button type="button" class="btn btn-next" id="next-step">التالي</button><button type="submit" class="btn btn-submit" id="submit-form" hidden>إرسال طلب التسجيل</button></div>
+</form></main><footer class="site-footer">مدرسة بي مينزيت للألحان والطقوس الكنسية <span>✝</span> نظام التسجيل الإلكتروني</footer></div></body></html>
