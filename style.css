@@ -67,3 +67,16 @@ body{background:#f4f2f2;color:var(--ink)}
 .empty{padding:18px;text-align:center;color:#827879;font-size:12px}
 @media(max-width:900px){.admin-layout{grid-template-columns:1fr;padding:0 14px}.admin-side{position:static;display:flex;gap:5px;flex-wrap:wrap;align-items:center}.admin-side h2{width:100%;margin-bottom:5px}.admin-side a{flex:1;text-align:center;min-width:100px}.admin-side small{width:100%}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.reference-page{padding:0}.reference-shell{border-radius:0;padding:10px 8px}.site-header{padding:12px;min-height:auto}.identity h1{font-size:17px}.identity h2{font-size:13px}.school-logo{width:72px;height:72px}.admin-layout{padding:0 9px;gap:12px}.admin-side{padding:9px}.admin-side a{font-size:11px;padding:8px 5px}.admin-title{font-size:17px}.stat{padding:12px}.stat strong{font-size:24px}.admin-panel{padding:12px}.reference-shell{box-shadow:none}.reference-header{padding-bottom:13px;margin-bottom:13px}}
+
+/* Dashboard shares the same white and burgundy identity */
+:root{--wine:#821d28;--wine2:#821d28;--ink:#282426;--muted:#756b6c;--line:#e7dddd;--paper:#fffdfa;--cream:#fbf7f7;--green:#821d28;--blue:#821d28;--purple:#821d28;--gold:#821d28;--teal:#821d28}
+body{background:#f6f3f3!important;color:#282426!important}
+.site-header{background:#fff;border:1px solid #e7dddd;border-top:4px solid #821d28;border-radius:0 0 13px 13px;margin:12px auto 18px;max-width:1440px;box-shadow:0 5px 18px #3910160a}
+.admin-link{background:#821d28!important;border-radius:8px}
+.admin-side h2{background:#821d28!important}
+.admin-side a:hover,.admin-side a.active{background:#fbf0f1!important;color:#821d28!important}
+.stat{border-top-color:#821d28!important}
+.stat strong,.admin-panel h3,.admin-title{color:#821d28!important}
+.admin-panel th{background:#fbf0f1!important;color:#821d28!important}
+.status{background:#fbf0f1!important;color:#821d28!important}
+@media(max-width:560px){.site-header{margin:0 8px 12px;padding:10px;border-radius:0 0 10px 10px}.identity{gap:9px}.school-logo{width:55px;height:55px}.identity h1{font-size:16px}.identity h2{font-size:12px}.identity p{font-size:11px}}
