@@ -763,7 +763,7 @@ body.registration-app::before{
 .registration-app .form-only-layout .stepper{margin:10px auto 16px;padding:10px 16px;border:1px solid #e3dddd;border-radius:9px;background:rgba(239,244,243,.92)}
 .registration-app .form-only-layout .stepper ol,.registration-app .form-only-layout .stepper .progress-track{display:none!important}
 .registration-app .form-only-layout .step-counter{display:flex;flex-direction:row-reverse;align-items:center;justify-content:space-between;gap:14px;margin:0;padding:0;border:0;color:#777;font-size:14px}
-.registration-app .form-only-layout .step-counter::before{content:"";order:1;flex:1;height:7px;border-radius:20px;background:#d5d5d5;box-shadow:inset 0 1px 2px #00000012}
+.registration-app .form-only-layout .step-counter::before{content:"";order:1;flex:1;height:7px;border-radius:20px;background:linear-gradient(to left,#777 0 var(--progress,10%),#d5d5d5 var(--progress,10%) 100%);box-shadow:inset 0 1px 2px #00000012}
 .registration-app .form-only-layout .step-counter #step-number{order:2;white-space:nowrap}
 .registration-app .form-only-layout .step-counter #progress-percent{display:none}
 .registration-app .form-only-layout .form-step{min-height:360px;border:1px solid #e8e0e0;border-radius:10px;background:rgba(255,255,255,.92)}
