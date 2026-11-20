@@ -627,3 +627,13 @@ body.registration-app,
 }
 
 .privacy-note{margin:10px 0;padding:9px 12px;border-radius:7px;background:#faf6f4;color:#76676a;font-size:11px;line-height:1.8}
+
+.id-match-panel{margin:16px 0;padding:16px 18px;border:1px solid #ded4d5;border-radius:10px;background:#fbf8f8}
+.id-match-panel h3{margin:0 0 6px;color:var(--wine);font-size:16px}
+.id-match-panel p{margin:0 0 4px;font-weight:700;color:#51494a}
+.id-match-panel small{color:var(--muted);font-size:12px}
+.id-match-panel.is-match{border-color:#9bc9a6;background:#f0f8f1}
+.id-match-panel.is-match h3,.id-match-panel.is-match p{color:#176b35}
+.id-match-panel.is-error{border-color:#d9a3a3;background:#fff5f5}
+.id-match-panel.is-error h3,.id-match-panel.is-error p{color:#9b2630}
+.id-match-panel[data-state="processing"]{border-color:#d6b66c;background:#fffaf0}
