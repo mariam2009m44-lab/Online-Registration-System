@@ -9,7 +9,7 @@ const val=n=>{const e=form.elements[n];return e&&e.value.trim()?e.value.trim():"
 function toWesternDigits(value){return String(value).replace(/[٠-٩]/g,d=>String("٠١٢٣٤٥٦٧٨٩".indexOf(d))).replace(/[۰-۹]/g,d=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)));}
 function getBirthDateFromNationalId(raw){
  const id=toWesternDigits(raw).replace(/\s/g,"");
- if(!/^([23])\d{12}$/.test(id)) return null;
+ if(!/^([23])\d{13}$/.test(id)) return null;
  const century=id[0]==="2"?1900:2000;
  const year=century+Number(id.slice(1,3));
  const month=Number(id.slice(3,5));
