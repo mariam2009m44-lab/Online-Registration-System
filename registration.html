@@ -6,7 +6,7 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-reference-exact"><script src="script.js?v=20261120-reference-form" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-ten-pages"><script src="script.js?v=20261120-ten-pages" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
 <header class="school-banner"><img src="https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg" alt="مدرسة بي مينزيت للألحان والطقوس الكنسية - كنيسة ماريوحنا الحبيب ببهتيم"></header>
@@ -17,34 +17,70 @@
 <div class="reference-title">Ⲡⲓⲥⲭⲟⲗⲓⲟⲛ Ⲛ̀ⲛⲓⲇⲓⲁⲕⲟⲛ Ⲛ̀ⲧⲉ Ⲓⲱⲁⲛⲛⲏⲥ Ⲡⲓⲁⲅⲏⲛⲧⲟⲥ</div>
 <section class="intro-card reference-intro"><h1>نموذج التسجيل (متعدد الخطوات)</h1></section>
 <nav class="stepper" aria-label="مراحل التسجيل"><div class="progress-track"><span id="progress-fill"></span></div><ol>
-<li class="step active" data-step-indicator="0"><span>♟</span><small>البيانات الشخصية</small></li>
-<li class="step" data-step-indicator="1"><span>♜</span><small>البيانات الكنسية</small></li>
-<li class="step" data-step-indicator="2"><span>🎓</span><small>البيانات الدراسية</small></li>
-<li class="step" data-step-indicator="3"><span>▤</span><small>الدراسات والخبرات</small></li>
-<li class="step" data-step-indicator="4"><span>✚</span><small>رفع الملفات</small></li>
-<li class="step" data-step-indicator="5"><span>☑</span><small>مراجعة وإرسال</small></li>
-</ol><div class="step-counter"><span id="step-number">الخطوة ١ من ٦</span><span id="progress-percent">١٧٪</span></div></nav><form id="registration-form" novalidate>
+<li class="step active" data-step-indicator="0"><span>١</span><small>نبذة وأهداف المدرسة</small></li>
+<li class="step" data-step-indicator="1"><span>٢</span><small>شروط الالتحاق</small></li>
+<li class="step" data-step-indicator="2"><span>٣</span><small>البيانات الشخصية</small></li>
+<li class="step" data-step-indicator="3"><span>٤</span><small>البيانات الكنسية</small></li>
+<li class="step" data-step-indicator="4"><span>٥</span><small>البيانات الدراسية</small></li>
+<li class="step" data-step-indicator="5"><span>٦</span><small>الدراسات والخبرات</small></li>
+<li class="step" data-step-indicator="6"><span>٧</span><small>رفع الملفات</small></li>
+<li class="step" data-step-indicator="7"><span>٨</span><small>بيانات التحويل</small></li>
+<li class="step" data-step-indicator="8"><span>٩</span><small>التعهد</small></li>
+<li class="step" data-step-indicator="9"><span>١٠</span><small>مراجعة وإرسال</small></li>
+</ol><div class="step-counter"><span id="step-number">الصفحة ١ من ١٠</span><span id="progress-percent">١٠٪</span></div></nav><form id="registration-form" novalidate>
 <section class="form-step active" data-step="0">
- <section class="reference-section">
-  <div class="reference-section-title">البيانات الشخصية</div>
-  <div class="fields-grid reference-personal-grid">
-   <label class="field"><span>تاريخ الميلاد <b>*</b></span><input name="birthDate" type="date" required></label>
-   <label class="field"><span>النوع <b>*</b></span><select name="gender" required><option value="">اختر النوع</option><option>ذكر</option><option>أنثى</option></select></label>
-   <label class="field"><span>الاسم القبطي</span><input name="copticName" placeholder="الاسم القبطي"></label>
-   <label class="field"><span>الاسم بالإنجليزية <b>*</b></span><input name="fullName" autocomplete="name" required maxlength="150" placeholder="Full Name"></label>
-   <label class="field"><span>العمر</span><input name="age" readonly placeholder="يُحسب تلقائيًا"></label>
-   <label class="field"><span>الرقم القومي <b>*</b></span><input name="nationalId" inputmode="numeric" maxlength="14" minlength="14" required placeholder="14 رقمًا"></label>
-   <label class="field"><span>رقم هاتف الشماس <b>*</b></span><input name="phone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
-   <label class="field"><span>رقم هاتف الأم <b>*</b></span><input name="motherPhone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
-   <label class="field"><span>رقم هاتف الأب <b>*</b></span><input name="fatherPhone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
-   <label class="field"><span>البريد الإلكتروني</span><input name="email" type="email" autocomplete="email" placeholder="example@gmail.com"></label>
-   <label class="field field-wide"><span>العنوان بالتفصيل <b>*</b></span><input name="address" required placeholder="الشارع، رقم العقار، المنطقة"></label>
-   <label class="field"><span>المحافظة</span><select name="governorate"><option value="">اختر المحافظة</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>القليوبية</option><option>كفر الشيخ</option><option>الغربية</option><option>البحيرة</option><option>الدقهلية</option><option>الشرقية</option><option>أخرى</option></select></label>
-   <label class="field"><span>المدينة <b>*</b></span><input name="city" required placeholder="اختر المدينة"></label>
-  </div>
+ <section class="reference-section welcome-form-page">
+  <div class="reference-section-title">نظام التسجيل الإلكتروني - مدرسة بى مينريت للألحان والطقوس الكنسية</div>
+  <h2 class="page-title">نبذة عن المدرسة</h2>
+  <p class="page-copy">تسعى المدرسة إلى إعداد شمامسة مؤهلين روحياً وعملياً في فنون الألحان والطقوس الكنسية.</p>
+  <h2 class="page-title">أهداف المدرسة</h2>
+  <ul class="goal-list">
+   <li>إعداد شماسة متميزين على معرفة تامة بالطقوس الكنسية وتعاليمها.</li>
+   <li>تنمية مواهب الألحان والترتيل وتشجيع الطلاب على تطوير مهاراتهم الموسيقية والكنسية.</li>
+   <li>تعزيز اللغة القبطية والهوية القبطية والحفاظ على التراث الكنسي والقبطي.</li>
+   <li>إعداد خدام متميزين قادرين على خدمة الكنيسة بكفاءة وأمانة.</li>
+  </ul>
  </section>
 </section>
 <section class="form-step" data-step="1" hidden>
+ <section class="reference-section">
+  <div class="reference-section-title">شروط الالتحاق بمدرسة بى مينريت للألحان والطقوس الكنسية</div>
+  <ul class="condition-list">
+   <li><strong>السن:</strong> ألا يقل عمر المتقدم عن 7 سنوات.</li>
+   <li><strong>العضوية الكنسية:</strong> أن يكون المتقدم من أبناء الكنيسة القبطية الأرثوذكسية.</li>
+   <li><strong>الالتزام بالدراسة:</strong> الالتزام بدراسة المناهج المقررة بالمدرسة.</li>
+   <li><strong>المستندات:</strong> إحضار جميع الأوراق والمستندات المطلوبة للتسجيل.</li>
+   <li><strong>الحضور والالتزام:</strong> الالتزام بحضور المحاضرات والصلوات والمشاركة في أنشطة المدرسة.</li>
+   <li><strong>الاشتراك السنوي:</strong> تبلغ قيمة الاشتراك السنوي 150 جنيهًا مصريًا.</li>
+  </ul>
+  <div class="transfer-number"><span>رقم التحويل</span><strong dir="ltr">01220540487</strong></div>
+ </section>
+</section>
+<section class="form-step active" data-step="2">
+ <section class="reference-section">
+  <div class="reference-section-title">البيانات الشخصية</div>
+  <div class="fields-grid reference-personal-grid">
+   <label class="field"><span>الاسم الكامل <b>*</b></span><input name="fullName" autocomplete="name" required maxlength="150" placeholder="الاسم الكامل"><small class="field-help">اكتب الاسم كما هو مطلوب في مستنداتك.</small></label>
+   <label class="field"><span>الاسم بالإنجليزية</span><input name="englishName" placeholder="Full Name"></label>
+   <label class="field"><span>الاسم القبطي</span><input name="copticName" placeholder="الاسم القبطي"></label>
+   <label class="field"><span>النوع <b>*</b></span><select name="gender" required><option value="">اختر النوع</option><option>ذكر</option><option>أنثى</option></select></label>
+   <label class="field"><span>العمر <b>*</b></span><input name="age" type="number" min="7" max="120" readonly required placeholder="يُحسب تلقائيًا"></label>
+   <label class="field"><span>البريد الإلكتروني <b>*</b></span><input name="email" type="email" autocomplete="email" required placeholder="example@gmail.com"></label>
+   <label class="field"><span>الرقم القومي <b>*</b></span><input name="nationalId" inputmode="numeric" maxlength="14" minlength="14" required placeholder="14 رقمًا"></label>
+   <label class="field"><span>رقم هاتف الشماس <b>*</b></span><input name="phone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
+   <label class="field"><span>رقم هاتف واتس الشماس <b>*</b></span><input name="whatsappPhone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
+   <label class="field"><span>رقم الهاتف أو واتس الأم <b>*</b></span><input name="motherPhone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
+   <label class="field"><span>رقم الهاتف أو واتس الأب <b>*</b></span><input name="fatherPhone" type="tel" inputmode="tel" required placeholder="01xxxxxxxxx"></label>
+   <label class="field"><span>تاريخ الميلاد <b>*</b></span><input name="birthDate" type="date" required></label>
+   <label class="field"><span>المحافظة <b>*</b></span><select name="governorate" required><option value="">حدد المحافظة</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>القليوبية</option><option>كفر الشيخ</option><option>الغربية</option><option>البحيرة</option><option>الدقهلية</option><option>الشرقية</option><option>المنوفية</option><option>دمياط</option><option>بورسعيد</option><option>الإسماعيلية</option><option>السويس</option><option>شمال سيناء</option><option>جنوب سيناء</option><option>بني سويف</option><option>الفيوم</option><option>المنيا</option><option>أسيوط</option><option>سوهاج</option><option>قنا</option><option>الأقصر</option><option>أسوان</option><option>البحر الأحمر</option><option>الوادي الجديد</option><option>مطروح</option></select></label>
+   <label class="field"><span>رقم - اسم الشارع <b>*</b></span><input name="streetName" required placeholder="رقم واسم الشارع"></label>
+   <label class="field"><span>رقم البيت <b>*</b></span><input name="houseNumber" type="number" min="1" required placeholder="رقم البيت"></label>
+   <label class="field"><span>المنطقة (المدينة / المركز) <b>*</b></span><input name="area" required placeholder="المدينة أو المركز"><small class="field-help">أدخل اسم المدينة أو المركز.</small></label>
+   <label class="field field-wide"><span>عنوان الشارع بالتفصيل <b>*</b></span><input name="address" required placeholder="العنوان بالتفصيل"></label>
+  </div>
+ </section>
+</section>
+<section class="form-step" data-step="3" hidden>
  <div class="section-heading"><span class="section-icon">٢</span><div><h2>البيانات الكنسية</h2><p>Church Information</p></div></div>
  <section class="reference-section"><div class="reference-section-title">بيانات الكنيسة والخدمة</div><div class="fields-grid">
   <label class="field"><span>الإيبارشية <b>*</b></span><input name="diocese" required placeholder="اسم الإيبارشية"></label>
@@ -53,7 +89,7 @@
   <label class="field"><span>الخدمة الحالية</span><input name="currentService" placeholder="إن وجدت"></label>
  </div></section>
 </section>
-<section class="form-step" data-step="2" hidden>
+<section class="form-step" data-step="4" hidden>
  <div class="section-heading"><span class="section-icon">٣</span><div><h2>البيانات الدراسية</h2><p>Education Information</p></div></div>
  <section class="reference-section"><div class="reference-section-title">البيانات التعليمية والدراسية</div><div class="fields-grid">
   <label class="field"><span>المرحلة الدراسية / السنة <b>*</b></span><select name="educationLevel" required><option value="">اختر المرحلة</option><option>ابتدائي</option><option>إعدادي</option><option>ثانوي</option><option>جامعي</option><option>خريج</option></select></label>
@@ -62,7 +98,7 @@
   <label class="field"><span>السنة الدراسية الجامعية</span><select name="universityYear"><option value="">اختر إن وجد</option><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option><option>دراسات عليا</option></select></label>
  </div></section>
 </section>
-<section class="form-step" data-step="3" hidden>
+<section class="form-step" data-step="5" hidden>
  <div class="section-heading"><span class="section-icon">٤</span><div><h2>الدراسات والخبرات</h2><p>Studies &amp; Experience</p></div></div>
  <section class="reference-section"><div class="reference-section-title">الدراسات والخبرات والمواهب</div><div class="fields-grid">
   <label class="field field-wide"><span>الدراسات أو الدورات السابقة</span><textarea name="studies" rows="3" placeholder="اذكر الدراسات أو الدورات ذات الصلة"></textarea></label>
@@ -73,7 +109,7 @@
   <label class="field"><span>مستواك في الطقس</span><select name="ritualLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></label>
  </div></section>
 </section>
-<section class="form-step" data-step="4" hidden>
+<section class="form-step" data-step="6" hidden>
  <div class="section-heading"><span class="section-icon">٥</span><div><h2>رفع الملفات</h2><p>Documents &amp; Attachments</p></div></div>
  <p class="upload-intro">يرجى رفع الملفات المطلوبة (الحد الأقصى لكل ملف 5MB).</p>
  <div class="upload-grid reference-upload-grid">
@@ -84,11 +120,25 @@
  </div>
  <div class="info-note warning">اختيار الملفات هنا للمعاينة داخل النموذج فقط. لم يتم إعداد تخزين آمن أو ربط رفع الملفات بعد.</div>
 </section>
-<section class="form-step" data-step="5" hidden>
+<section class="form-step" data-step="7" hidden>
+ <div class="section-heading"><span class="section-icon">٨</span><div><h2>بيانات الاشتراك والتحويل</h2><p>Payment Information</p></div></div>
+ <section class="reference-section">
+  <div class="reference-section-title">الاشتراك السنوي</div>
+  <p class="page-copy">قيمة الاشتراك السنوي 150 جنيهًا مصريًا. يرجى مراجعة رقم التحويل الموضح في صفحة شروط الالتحاق قبل إتمام التحويل.</p>
+  <div class="transfer-number"><span>رقم التحويل</span><strong dir="ltr">01220540487</strong></div>
+  <label class="field payment-upload"><span>إرفاق صورة إثبات التحويل</span><input type="file" name="paymentReceipt" accept="image/*,.pdf"><small class="field-help">يمكن إرفاق صورة أو ملف PDF. تأكيد السداد يتم من إدارة المدرسة.</small></label>
+ </section>
+ <div class="info-note warning">إرفاق الملف هنا لا يعني أنه تم تحويل المبلغ أو استلامه؛ تأكيد السداد يتم من إدارة المدرسة.</div>
+</section>
+<section class="form-step" data-step="8" hidden>
+ <div class="section-heading"><span class="section-icon">٩</span><div><h2>التعهد والالتزام</h2><p>Declaration</p></div></div>
+  <div class="declaration"><h3>التعهد والالتزام</h3><p>أتعهد بالالتزام بجميع قوانين المدرسة والأنظمة الخاصة بها، وأتحمل المسؤولية الكاملة عن صحة البيانات المدخلة.</p><label><input type="checkbox" name="consent" required> أوافق على الشروط وأقر بصحة البيانات المقدمة. <b>*</b></label></div>
+</section>
+<section class="form-step" data-step="9" hidden>
  <div class="section-heading"><span class="section-icon">٦</span><div><h2>مراجعة وإرسال</h2><p>Review &amp; Submit</p></div></div>
  <p class="review-intro">راجِع البيانات التالية قبل الإرسال، ويمكنك الرجوع لأي خطوة لتعديلها.</p>
  <div id="review-summary" class="review-grid"></div>
- <div class="declaration"><h3>التعهد والالتزام</h3><p>أتعهد بالالتزام بجميع قوانين المدرسة والأنظمة الخاصة بها، وأتحمل المسؤولية الكاملة عن صحة البيانات المدخلة.</p><label><input type="checkbox" name="consent" required> أوافق على الشروط وأقر بصحة البيانات المقدمة. <b>*</b></label></div>
+
  <div class="info-note warning" id="integration-notice">الإرسال الإلكتروني غير مفعّل بعد؛ لم يتم ربط Google Forms أو قاعدة بيانات. لن تُرسل بياناتك من هذه الصفحة.</div>
 </section>
 <div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div><div class="form-actions"><button type="button" class="btn btn-back" id="prev-step" disabled>السابق</button><span class="secure-note">لا تُرسل بيانات فعلية قبل تفعيل الربط الآمن</span><button type="button" class="btn btn-next" id="next-step">التالي</button><button type="submit" class="btn btn-submit" id="submit-form" hidden>إرسال طلب التسجيل</button></div>
