@@ -636,3 +636,89 @@ body.registration-app,
 .ocr-status[data-state="success"]{background:#edf8ef;border-color:#b8d9bd;color:#236b37}
 .ocr-status[data-state="error"]{background:#fff0f0;border-color:#e8b9b9;color:#9b2631}
 @media(max-width:620px){.national-id-upload{grid-column:1/-1}.ocr-status{font-size:11px;padding:9px}}
+
+
+/* Seamless school identity: banner touches the form and the uploaded artwork
+   continues as a soft watermark behind every separate form page. */
+body.registration-app{
+  position:relative;
+  isolation:isolate;
+  background:#f7f5f3;
+}
+body.registration-app::before{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background-image:url("https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg");
+  background-repeat:no-repeat;
+  background-position:center 54%;
+  background-size:min(94vw,920px) auto;
+  opacity:.075;
+}
+.registration-app .app-shell{padding-top:0}
+.registration-app .school-banner{
+  margin:0 auto!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+.registration-app .school-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:360px;
+  object-fit:contain;
+}
+.registration-app .form-only-layout{
+  margin-top:0!important;
+}
+.registration-app .form-only-layout .intro-card,
+.registration-app .form-only-layout .reference-title,
+.registration-app .form-only-layout .reference-intro,
+.registration-app .form-only-layout .stepper{
+  margin-top:0;
+}
+.registration-app .form-only-layout .form-step{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:rgba(255,255,255,.89);
+  backdrop-filter:blur(1.5px);
+}
+.registration-app .form-only-layout .form-step::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  background-image:url("https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg");
+  background-repeat:no-repeat;
+  background-position:center 46%;
+  background-size:min(88%,700px) auto;
+  opacity:.10;
+}
+.registration-app .form-only-layout .form-step > *{
+  position:relative;
+}
+.registration-app .form-only-layout .form-step .reference-section{
+  background:rgba(255,255,255,.76);
+}
+.registration-app .form-only-layout .form-step .reference-section-title{
+  box-shadow:0 2px 7px rgba(75,18,27,.10);
+}
+@media(max-width:620px){
+  .registration-app .school-banner img{max-height:none}
+  .registration-app .form-only-layout{margin-top:0!important}
+  .registration-app .form-only-layout .form-step{
+    background:rgba(255,255,255,.86);
+    padding:15px 10px;
+  }
+  .registration-app .form-only-layout .form-step::before{
+    background-size:112% auto;
+    background-position:center 42%;
+    opacity:.085;
+  }
+}
