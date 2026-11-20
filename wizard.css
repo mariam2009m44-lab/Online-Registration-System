@@ -627,3 +627,12 @@ body.registration-app,
 }
 
 .privacy-note{margin:10px 0;padding:9px 12px;border-radius:7px;background:#faf6f4;color:#76676a;font-size:11px;line-height:1.8}
+
+/* Local national-ID image matching feedback */
+.national-id-upload{grid-column:1/-1}
+.national-id-upload b{color:var(--wine)}
+.ocr-status{grid-column:1/-1;margin:2px 0 0;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:#faf8f6;color:var(--muted);font-size:12px;line-height:1.8}
+.ocr-status[data-state="loading"]{background:#fff8e8;border-color:#ead6a6;color:#795b20}
+.ocr-status[data-state="success"]{background:#edf8ef;border-color:#b8d9bd;color:#236b37}
+.ocr-status[data-state="error"]{background:#fff0f0;border-color:#e8b9b9;color:#9b2631}
+@media(max-width:620px){.national-id-upload{grid-column:1/-1}.ocr-status{font-size:11px;padding:9px}}
