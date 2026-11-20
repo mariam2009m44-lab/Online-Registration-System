@@ -600,3 +600,30 @@ body.registration-app,
  .form-only-layout .secure-note{display:none}
 }
 @media(max-width:350px){.form-only-layout .fields-grid{grid-template-columns:1fr}}
+
+/* Ten separate registration pages and reference-style content */
+.page-title{margin:18px 0 6px;color:var(--wine);font-size:20px;font-weight:900}
+.page-copy{margin:6px 0 14px;font-size:14px;line-height:2;color:#4f4547}
+.goal-list,.condition-list{margin:8px 0 4px;padding:0 24px 0 4px}
+.goal-list li,.condition-list li{padding:7px 4px;border-bottom:1px solid #f0e8e8;font-size:14px;line-height:1.9}
+.goal-list li::marker,.condition-list li::marker{color:var(--wine)}
+.condition-list strong{color:var(--wine)}
+.transfer-number{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0;padding:14px 17px;border:1px solid #e6d1d4;border-radius:9px;background:linear-gradient(110deg,#fff,#fbf1f2)}
+.transfer-number span{font-weight:800;color:var(--wine)}
+.transfer-number strong{font-size:21px;letter-spacing:1px;color:var(--wine-dark)}
+.field-help{font-size:10px;color:#8a777a;font-weight:500}
+.payment-upload{max-width:520px;margin-top:18px}
+.reference-personal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:900px){.reference-personal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.reference-personal-grid{grid-template-columns:1fr}.page-title{font-size:17px}.goal-list li,.condition-list li,.page-copy{font-size:12px}.transfer-number{padding:11px}.transfer-number strong{font-size:17px}}
+
+/* Ten-step progress navigation */
+.stepper ol{grid-template-columns:repeat(10,minmax(0,1fr))}
+.stepper .step small{font-size:10px;line-height:1.35}
+@media(max-width:760px){
+ .stepper{overflow-x:auto}
+ .stepper ol{grid-template-columns:repeat(10,minmax(66px,1fr));min-width:660px}
+ .stepper .step small{font-size:9px}
+}
+
+.privacy-note{margin:10px 0;padding:9px 12px;border-radius:7px;background:#faf6f4;color:#76676a;font-size:11px;line-height:1.8}
