@@ -1,7 +1,7 @@
 :root{--wine:#821d28;--wine-dark:#68151f;--ink:#30292a;--muted:#776c6d;--line:#eadfe0;--paper:#fff;--page:#f7f3f2;--gold:#c19a59}
 *{box-sizing:border-box}
 html{min-height:100%;background:var(--page)}
-body{margin:0;min-height:100vh;background:linear-gradient(180deg,#fff 0,#f8f4f3 330px,#f7f3f2 100%);font-family:"Cairo",Arial,sans-serif;color:var(--ink);line-height:1.8}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,#fff 0,#f8f4f3 330px,#f7f3f2 100%);font-family:"Noto Naskh Arabic","Noto Sans Coptic",serif;color:var(--ink);line-height:1.8}
 .school-banner{width:100%;background:#fff;line-height:0;overflow:hidden;border-bottom:4px solid var(--wine)}
 .school-banner img{display:block;width:100%;height:auto;object-fit:contain}
 .home-wrap{width:min(100% - 30px,1050px);margin:30px auto 42px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
@@ -30,3 +30,12 @@ h1{color:var(--wine);font-size:clamp(27px,4vw,42px);line-height:1.4;margin:12px 
 footer{text-align:center;padding:16px;color:#857879;font-size:11px;border-top:1px solid var(--line);background:#fff}
 @media(max-width:720px){.home-wrap{grid-template-columns:1fr;width:calc(100% - 20px);margin:14px auto 25px;gap:10px}.welcome-card{padding:26px 14px 22px}.lead{font-size:16px}.welcome-copy{font-size:13px}.about-card,.steps-card{padding:16px}.about-card h2,.steps-card h2{font-size:17px}.steps-card ol{grid-template-columns:1fr 1fr;gap:8px 5px}.steps-card li{font-size:11px}.start-button{width:100%;min-width:0;max-width:330px}}
 @media(max-width:390px){.steps-card ol{grid-template-columns:1fr}.welcome-card h1{font-size:26px}}
+
+/* Typography matched to the school's traditional Arabic reference */
+body,.welcome-card,.about-card,.steps-card,footer,.start-button{
+  font-family:"Noto Naskh Arabic","Noto Sans Coptic",serif;
+}
+h1,h2,h3,.eyebrow,.lead,.church,.steps-card li{
+  font-family:"Noto Naskh Arabic","Noto Sans Coptic",serif;
+  letter-spacing:0;
+}
