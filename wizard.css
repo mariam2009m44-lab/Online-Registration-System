@@ -625,3 +625,5 @@ body.registration-app,
  .stepper ol{grid-template-columns:repeat(10,minmax(66px,1fr));min-width:660px}
  .stepper .step small{font-size:9px}
 }
+
+.privacy-note{margin:10px 0;padding:9px 12px;border-radius:7px;background:#faf6f4;color:#76676a;font-size:11px;line-height:1.8}
