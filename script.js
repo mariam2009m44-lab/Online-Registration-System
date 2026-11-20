@@ -44,7 +44,7 @@ if(nationalIdInput&&birthDateInput){
 }
 
 let verifiedNationalId="",verifiedNationalIdFile=null;
-const nationalIdFileInput=form.elements.nationalIdFile;
+const birthCertificateInput=form.elements.birthCertificate;
 const ocrStatus=document.getElementById("national-id-ocr-status");
 function setOcrStatus(message,state="info"){
  if(!ocrStatus)return;
@@ -55,16 +55,16 @@ if(nationalIdInput) nationalIdInput.addEventListener("input",()=>{
  verifiedNationalId="";verifiedNationalIdFile=null;
  setOcrStatus("تم تغيير الرقم المكتوب. ستتم إعادة المطابقة عند المتابعة.","info");
 });
-if(nationalIdFileInput) nationalIdFileInput.addEventListener("change",()=>{
+if(birthCertificateInput) birthCertificateInput.addEventListener("change",()=>{
  verifiedNationalId="";verifiedNationalIdFile=null;
- const file=nationalIdFileInput.files&&nationalIdFileInput.files[0];
+ const file=birthCertificateInput.files&&birthCertificateInput.files[0];
  setOcrStatus(file?"تم اختيار الصورة. اضغط «التالي» لقراءة الرقم ومطابقته.":"لم يتم اختيار صورة البطاقة.","info");
 });
 async function verifyNationalIdImage(){
  const entered=toWesternDigits(nationalIdInput.value).replace(/\D/g,"");
- const file=nationalIdFileInput&&nationalIdFileInput.files&&nationalIdFileInput.files[0];
- if(!file){setOcrStatus("ارفع صورة بطاقة الرقم القومي أولاً.","error");say("صورة بطاقة الرقم القومي مطلوبة للمطابقة.");return false;}
- if(!file.type.startsWith("image/")){setOcrStatus("الملف المختار ليس صورة مدعومة. استخدم JPG أو PNG.","error");say("يرجى رفع صورة واضحة بصيغة JPG أو PNG.");return false;}
+ const file=birthCertificateInput&&birthCertificateInput.files&&birthCertificateInput.files[0];
+ if(!file){setOcrStatus("ارفع صورة شهادة الميلاد أولاً.","error");say("شهادة الميلاد مطلوبة لمطابقة الرقم القومي.");return false;}
+ if(!file.type.startsWith("image/")&&file.type!=="application/pdf"&&!file.name.toLowerCase().endsWith(".pdf")){setOcrStatus("نوع الملف غير مدعوم. استخدم صورة JPG أو PNG أو ملف PDF.","error");say("يرجى رفع شهادة ميلاد واضحة بصيغة JPG أو PNG أو PDF.");return false;}
  if(file.size>5*1024*1024){setOcrStatus("حجم الصورة أكبر من 5MB.","error");say("حجم صورة البطاقة يجب ألا يتجاوز 5MB.");return false;}
  if(verifiedNationalId===entered&&verifiedNationalIdFile===file)return true;
  if(!window.Tesseract){setOcrStatus("تعذر تحميل أداة قراءة الصورة. تحقق من اتصال الإنترنت ثم أعد المحاولة.","error");say("تعذر تشغيل قراءة الصورة. تحقق من الإنترنت وحاول مرة أخرى.");return false;}
@@ -73,28 +73,40 @@ async function verifyNationalIdImage(){
   setOcrStatus("جارٍ قراءة الأرقام من الصورة على جهازك... قد يستغرق ذلك بعض الوقت في أول مرة.","loading");
   worker=await window.Tesseract.createWorker("eng",1);
   await worker.setParameters({tessedit_char_whitelist:"0123456789",tessedit_pageseg_mode:"6"});
-  const result=await worker.recognize(file);
+  let ocrSource=file;
+  if(file.type==="application/pdf"||file.name.toLowerCase().endsWith(".pdf")){
+   if(!window.pdfjsLib)throw new Error("تعذر تحميل قارئ PDF. جرّب رفع صورة JPG أو PNG.");
+   window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+   const pdf=await window.pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+   const page=await pdf.getPage(1);
+   const viewport=page.getViewport({scale:2.5});
+   const canvas=document.createElement("canvas");
+   canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
+   await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
+   ocrSource=canvas;
+  }
+  const result=await worker.recognize(ocrSource);
   const recognized=String(result.data.text||"");
   const matches=recognized.match(/(?:\d[\s\r\n-]*){14}/g)||[];
   const candidates=matches.map(value=>value.replace(/\D/g,"")).filter(value=>value.length===14);
   const confidence=Number(result.data.confidence||0);
   if(confidence<55||candidates.length===0){
    setOcrStatus("لم نتمكن من قراءة الرقم بوضوح. ارفع صورة أوضح ومستقيمة يظهر فيها الرقم بالكامل.","error");
-   say("تعذرت قراءة الرقم من الصورة. يرجى رفع صورة أوضح للبطاقة.");
+   say("تعذرت قراءة الرقم من شهادة الميلاد. يرجى رفع صورة أوضح.");
    return false;
   }
   if(!candidates.includes(entered)){
    setOcrStatus("الرقم المستخرج من الصورة لا يطابق الرقم المكتوب. راجع الرقم أو أعد رفع الصورة الصحيحة.","error");
-   say("الرقم القومي المكتوب لا يطابق الرقم الموجود في صورة البطاقة.");
+   say("الرقم القومي المكتوب لا يطابق الرقم الموجود في شهادة الميلاد.");
    return false;
   }
   verifiedNationalId=entered;verifiedNationalIdFile=file;
-  setOcrStatus("تمت المطابقة بنجاح: الرقم الموجود في الصورة يطابق الرقم المكتوب.","success");
+  setOcrStatus("تمت المطابقة بنجاح: الرقم الموجود في شهادة الميلاد يطابق الرقم المكتوب.","success");
   return true;
  }catch(error){
   console.error("National ID OCR failed:",error);
   setOcrStatus("حدث خطأ أثناء قراءة الصورة. جرّب صورة أوضح أو أعد المحاولة لاحقاً.","error");
-  say("حدث خطأ أثناء قراءة صورة البطاقة. حاول مرة أخرى.");
+  say("حدث خطأ أثناء قراءة شهادة الميلاد. حاول مرة أخرى.");
   return false;
  }finally{
   if(worker){try{await worker.terminate()}catch(_){}}
