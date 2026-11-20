@@ -19,7 +19,8 @@ function getBirthDateFromNationalId(raw){
  return String(year).padStart(4,"0")+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0");
 }
 const ageInput=form.elements.age;
-function updateAge(iso){if(!ageInput)return;if(!iso){ageInput.value="";return;}const b=new Date(iso+"T00:00:00");if(Number.isNaN(b.getTime())){ageInput.value="";return;}const now=new Date();let years=now.getFullYear()-b.getFullYear();if(now.getMonth()<b.getMonth()||(now.getMonth()===b.getMonth()&&now.getDate()<b.getDate()))years--;ageInput.value=years>=0&&years<=120?String(years):"";}\nconst nationalIdInput=form.elements.nationalId;
+function updateAge(iso){if(!ageInput)return;if(!iso){ageInput.value="";return;}const b=new Date(iso+"T00:00:00");if(Number.isNaN(b.getTime())){ageInput.value="";return;}const now=new Date();let years=now.getFullYear()-b.getFullYear();if(now.getMonth()<b.getMonth()||(now.getMonth()===b.getMonth()&&now.getDate()<b.getDate()))years--;ageInput.value=years>=0&&years<=120?String(years):"";}
+const nationalIdInput=form.elements.nationalId;
 const birthDateInput=form.elements.birthDate;
 if(nationalIdInput&&birthDateInput){
  nationalIdInput.addEventListener("input",()=>{
@@ -50,7 +51,10 @@ if(i===2){
  if(!idDate){say("الرقم القومي غير صحيح أو تاريخ الميلاد الموجود بداخله غير صالح.");form.elements.nationalId.focus();return false}
  if(form.elements.birthDate.value!==idDate){say("تاريخ الميلاد لا يطابق تاريخ الميلاد المسجل داخل الرقم القومي.");form.elements.birthDate.focus();return false}
  if(!form.elements.email.checkValidity()){say("يرجى إدخال بريد إلكتروني صحيح.");form.elements.email.focus();return false}
- if(Number(form.elements.age.value)<7){say("يشترط ألا يقل عمر المتقدم عن 7 سنوات.");form.elements.birthDate.focus();return false}\n const areaValue=form.elements.area.value.trim();\n if(/عزبة العرب|القطاوى/.test(areaValue)){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false}\n if(!/^[+\d\s()-]{8,20}$/.test(form.elements.phone.value.trim())){say("يرجى مراجعة رقم هاتف الشماس.");form.elements.phone.focus();return false}
+ if(Number(form.elements.age.value)<7){say("يشترط ألا يقل عمر المتقدم عن 7 سنوات.");form.elements.birthDate.focus();return false}
+ const areaValue=form.elements.area.value.trim();
+ if(/عزبة العرب|القطاوى/.test(areaValue)){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false}
+ if(!/^[+\d\s()-]{8,20}$/.test(form.elements.phone.value.trim())){say("يرجى مراجعة رقم هاتف الشماس.");form.elements.phone.focus();return false}
  for(const key of ["whatsappPhone","motherPhone","fatherPhone"]){if(!/^[+\d\s()-]{8,20}$/.test(form.elements[key].value.trim())){say("يرجى مراجعة رقم هاتف الأم والأب.");form.elements[key].focus();return false}}
 }return true}
 const labels={fullName:"الاسم الكامل",englishName:"الاسم بالإنجليزية",copticName:"الاسم القبطي",gender:"النوع",age:"العمر",email:"البريد الإلكتروني",nationalId:"الرقم القومي",phone:"رقم هاتف الشماس",whatsappPhone:"رقم هاتف واتس الشماس",motherPhone:"رقم هاتف الأم",fatherPhone:"رقم هاتف الأب",birthDate:"تاريخ الميلاد",governorate:"المحافظة",streetName:"رقم واسم الشارع",houseNumber:"رقم البيت",area:"المنطقة / المدينة",address:"عنوان الشارع بالتفصيل",diocese:"الإيبارشية",church:"اسم الكنيسة",confessor:"اسم أب الاعتراف",currentService:"الخدمة الحالية",educationLevel:"المرحلة الدراسية",institution:"المدرسة / الجامعة",faculty:"الكلية / التخصص",universityYear:"السنة الجامعية",studies:"الدراسات السابقة",talents:"المواهب",skills:"المهارات",chantLevel:"مستوى الألحان",copticLevel:"مستوى القبطي",ritualLevel:"مستوى الطقس"}
