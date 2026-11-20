@@ -58,7 +58,10 @@ if(nationalIdInput) nationalIdInput.addEventListener("input",()=>{
 if(birthCertificateInput) birthCertificateInput.addEventListener("change",()=>{
  verifiedNationalId="";verifiedNationalIdFile=null;
  const file=birthCertificateInput.files&&birthCertificateInput.files[0];
- setOcrStatus(file?"تم اختيار الصورة. اضغط «التالي» لقراءة الرقم ومطابقته.":"لم يتم اختيار صورة البطاقة.","info");
+ if(!file){setOcrStatus("لم يتم اختيار شهادة الميلاد.","info");return;}
+ setOcrStatus("تم اختيار الشهادة. جارٍ قراءة الرقم ومطابقته تلقائيًا...","loading");
+ if(next)next.disabled=true;
+ verifyNationalIdImage().finally(()=>{if(next)next.disabled=false;});
 });
 async function verifyNationalIdImage(){
  const entered=toWesternDigits(nationalIdInput.value).replace(/\D/g,"");
