@@ -1,0 +1,32 @@
+:root{--wine:#821d28;--wine-dark:#68151f;--ink:#30292a;--muted:#776c6d;--line:#eadfe0;--paper:#fff;--page:#f7f3f2;--gold:#c19a59}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--page)}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,#fff 0,#f8f4f3 330px,#f7f3f2 100%);font-family:"Cairo",Arial,sans-serif;color:var(--ink);line-height:1.8}
+.school-banner{width:100%;background:#fff;line-height:0;overflow:hidden;border-bottom:4px solid var(--wine)}
+.school-banner img{display:block;width:100%;height:auto;object-fit:contain}
+.home-wrap{width:min(100% - 30px,1050px);margin:30px auto 42px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.welcome-card,.about-card,.steps-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(66,24,29,.055)}
+.welcome-card{grid-column:1/-1;text-align:center;padding:36px 24px 30px;position:relative;overflow:hidden}
+.welcome-card:before{content:"";position:absolute;inset:0 0 auto;height:7px;background:linear-gradient(90deg,var(--wine-dark),#a23c47,var(--gold),var(--wine))}
+.eyebrow{display:inline-block;background:#f8edef;color:var(--wine);border:1px solid #efdadd;border-radius:30px;padding:4px 15px;font-size:12px;font-weight:800}
+h1{color:var(--wine);font-size:clamp(27px,4vw,42px);line-height:1.4;margin:12px 0 4px;font-weight:900}
+.lead{font-size:19px;font-weight:800;margin:0;color:#3c3334}
+.church{font-size:14px;color:var(--wine);font-weight:700;margin:2px 0}
+.welcome-divider{height:1px;background:linear-gradient(90deg,transparent,#e5d4d6,transparent);max-width:500px;margin:20px auto}
+.welcome-card h2,.about-card h2,.steps-card h2{font-size:20px;color:var(--wine);margin:0 0 8px;font-weight:900}
+.welcome-copy{max-width:680px;margin:0 auto 22px;color:#625859;font-size:15px}
+.start-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-width:245px;padding:12px 24px;border-radius:9px;background:linear-gradient(135deg,#8f2632,var(--wine-dark));color:#fff;text-decoration:none;font-size:16px;font-weight:900;box-shadow:0 7px 17px rgba(104,21,31,.2);transition:transform .18s,box-shadow .18s}
+.start-button:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(104,21,31,.24)}
+.start-button span{font-size:22px}
+.small-note{font-size:11px;color:#958889;margin:12px 0 0}
+.about-card,.steps-card{padding:22px}
+.about-card{display:flex;gap:14px;align-items:flex-start}
+.about-icon{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;background:#f8edef;color:var(--wine);border-radius:11px;font-size:23px}
+.about-card p,.steps-card p{font-size:13px;color:#655a5b;line-height:2;margin:0}
+.steps-card ol{padding:0;margin:14px 0 10px;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.steps-card li{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#514849}
+.steps-card li span{width:25px;height:25px;flex:0 0 25px;border-radius:50%;display:grid;place-items:center;background:#f8edef;color:var(--wine);font-weight:900}
+.text-link{display:inline-block;margin-top:8px;color:var(--wine);font-size:12px;font-weight:900;text-decoration:none;border-bottom:1px solid #d9b9bd}
+footer{text-align:center;padding:16px;color:#857879;font-size:11px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:720px){.home-wrap{grid-template-columns:1fr;width:calc(100% - 20px);margin:14px auto 25px;gap:10px}.welcome-card{padding:26px 14px 22px}.lead{font-size:16px}.welcome-copy{font-size:13px}.about-card,.steps-card{padding:16px}.about-card h2,.steps-card h2{font-size:17px}.steps-card ol{grid-template-columns:1fr 1fr;gap:8px 5px}.steps-card li{font-size:11px}.start-button{width:100%;min-width:0;max-width:330px}}
+@media(max-width:390px){.steps-card ol{grid-template-columns:1fr}.welcome-card h1{font-size:26px}}
