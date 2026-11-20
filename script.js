@@ -198,5 +198,5 @@ next.addEventListener("click",async()=>{next.disabled=true;try{if(await validate
 prev.addEventListener("click",()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:"smooth"})}});
 indicators.forEach((e,i)=>e.addEventListener("click",()=>{if(i<current){current=i;render();window.scrollTo({top:0,behavior:"smooth"})}}));
 form.addEventListener("input",()=>alertBox.textContent="");form.addEventListener("change",()=>alertBox.textContent="");
-form.addEventListener("submit",e=>{e.preventDefault();if(current!==9||!validate(9))return;say("لم يتم إرسال الطلب: ربط Google Forms أو قاعدة بيانات آمنة لم يُفعّل بعد. لا تُدخل بيانات حقيقية في هذه النسخة التجريبية.")});render();
+form.addEventListener("submit",async e=>{e.preventDefault();if(current!==9)return;const valid=await validate(9);if(!valid)return;const uploadsValid=await validateAllUploads();if(!uploadsValid){say("يوجد ملف غير صالح. ارجع إلى صفحة رفع الملفات لمراجعة النتائج.");return;}say("لم يتم إرسال الطلب: لا يوجد خادم آمن متصل بعد. فحص الملفات الحالي أولي ولا يكتشف الفيروسات. لا تُدخل بيانات أو مستندات شخصية حقيقية في هذه النسخة التجريبية.")});render();
 })();
