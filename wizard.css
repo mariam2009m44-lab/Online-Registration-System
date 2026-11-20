@@ -356,3 +356,152 @@ body.registration-app{
  .form-only-layout .fields-grid{grid-template-columns:1fr}
  .form-only-layout .form-actions{bottom:5px}
 }
+
+/* Reference form styling: compact two-panel registration sheet */
+.form-only-layout{
+  width:min(100% - 28px,1040px)!important;
+  max-width:1040px!important;
+  margin:18px auto 24px!important;
+}
+.form-only-layout .intro-card{
+  background:#fff;
+  border:1px solid #e8dada;
+  border-top:7px solid #791d2b;
+  border-radius:9px;
+  padding:17px 22px 14px;
+  box-shadow:0 4px 15px rgba(63,19,27,.05);
+}
+.form-only-layout .eyebrow{
+  display:inline-block;
+  padding:3px 12px;
+  color:#fff;
+  background:#791d2b;
+  border-radius:4px;
+  font-size:10px;
+}
+.form-only-layout .intro-card h1{
+  margin:7px 0 2px;
+  color:#791d2b;
+  font-size:23px;
+  font-weight:900;
+}
+.form-only-layout .intro-card p{font-size:11px;color:#76696a}
+.form-only-layout .stepper{
+  border-radius:8px;
+  border:1px solid #e7dddd;
+  box-shadow:0 3px 12px rgba(63,19,27,.035);
+  padding:13px 16px 9px;
+}
+.form-only-layout .form-step{
+  border-radius:8px;
+  border:1px solid #e6dddd;
+  box-shadow:0 4px 15px rgba(63,19,27,.045);
+  padding:17px;
+}
+.form-only-layout .section-heading{
+  margin-bottom:12px;
+  padding-bottom:10px;
+}
+.form-only-layout .section-icon{
+  border-radius:6px;
+  background:#f7eded;
+  color:#791d2b;
+}
+.form-only-layout .section-heading h2{
+  font-size:16px;
+  color:#791d2b;
+}
+.form-only-layout .reference-columns{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  align-items:stretch;
+}
+.form-only-layout .reference-section{
+  border-radius:7px;
+  border:1px solid #e8dddd;
+  padding:8px;
+  background:#fff;
+}
+.form-only-layout .reference-section-title{
+  min-height:36px;
+  padding:6px 11px;
+  background:linear-gradient(100deg,#711824,#8b2936);
+  border-radius:5px;
+  font-size:12px;
+}
+.form-only-layout .reference-field{
+  grid-template-columns:27px minmax(92px,.82fr) minmax(110px,1.18fr);
+  min-height:54px;
+  gap:6px;
+  padding:5px 2px;
+}
+.form-only-layout .field-icon{font-size:19px}
+.form-only-layout .field-name{font-size:10px;line-height:1.45}
+.form-only-layout .field-name small{font-size:8px}
+.form-only-layout .field-control input,
+.form-only-layout .field-control select{
+  min-height:33px;
+  padding:5px 8px;
+  border-radius:5px;
+  border-color:#ded4d5;
+  background:#fdfcfc;
+  font-size:10px;
+}
+.form-only-layout .church-fields .reference-field{min-height:57px}
+.form-only-layout .church-fields .field-icon{font-size:20px}
+.form-only-layout .church-fields .field-name{font-size:10px}
+.form-only-layout .church-fields .field-control input{min-height:33px}
+.form-only-layout .summary-note{
+  border-radius:5px;
+  padding:8px 10px;
+  font-size:9px;
+}
+.form-only-layout .form-actions{
+  border:1px solid #e8dddd;
+  border-radius:7px;
+  padding:9px 11px;
+  background:#fff;
+}
+.form-only-layout .btn{
+  border-radius:5px;
+  font-size:11px!important;
+}
+.form-only-layout .btn-next,.form-only-layout .btn-submit{
+  background:#791d2b;
+}
+.form-only-layout .secure-note{font-size:9px}
+.form-only-layout .field-control input[aria-invalid="true"]{
+  border-color:#bd4651;
+  background:#fff8f8;
+}
+.form-only-layout .field-hint{
+  display:block;
+  color:#8a7476;
+  font-size:8px;
+  margin-top:3px;
+}
+@media(max-width:820px){
+  .form-only-layout .reference-columns{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .form-only-layout{width:calc(100% - 12px)!important;margin:8px auto 14px!important}
+  .form-only-layout .intro-card{padding:13px 11px}
+  .form-only-layout .intro-card h1{font-size:18px}
+  .form-only-layout .stepper{padding:10px 5px 8px}
+  .form-only-layout .form-step{padding:11px 8px}
+  .form-only-layout .reference-columns{grid-template-columns:1fr}
+  .form-only-layout .reference-field{
+    grid-template-columns:24px minmax(75px,.82fr) minmax(100px,1.18fr);
+    min-height:51px;
+    gap:4px;
+  }
+  .form-only-layout .field-name{font-size:9px}
+  .form-only-layout .field-control input,
+  .form-only-layout .field-control select{font-size:10px;min-height:34px}
+  .form-only-layout .church-fields .reference-field{min-height:53px}
+}
+@media(max-width:370px){
+  .form-only-layout .reference-field{
+    grid-template-columns:20px minmax(68px,.8fr) minmax(90px,1.2fr);
+  }
+}
