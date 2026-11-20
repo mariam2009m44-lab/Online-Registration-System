@@ -6,8 +6,8 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-seamless-watermark-fields"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="script.js?v=20261120-semester-classcode" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-forms-layout-v2"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="script.js?v=20261120-validation-v2" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
 <header class="school-banner"><img src="https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg" alt="مدرسة بي مينزيت للألحان والطقوس الكنسية - كنيسة ماريوحنا الحبيب ببهتيم"></header>
@@ -17,18 +17,7 @@
 <section class="intro-card"><div class="eyebrow">نظام التسجيل الإلكتروني</div><h1>استمارة الالتحاق بالمدرسة</h1><p>يرجى استكمال البيانات بدقة، ويمكنك الرجوع إلى الخطوات السابقة قبل الإرسال.</p></section>
 <div class="reference-title">Ⲡⲓⲥⲭⲟⲗⲓⲟⲛ Ⲛ̀ⲛⲓⲇⲓⲁⲕⲟⲛ Ⲛ̀ⲧⲉ Ⲓⲱⲁⲛⲛⲏⲥ Ⲡⲓⲁⲅⲏⲛⲧⲟⲥ</div>
 <section class="intro-card reference-intro"><h1>نموذج التسجيل (متعدد الخطوات)</h1></section>
-<nav class="stepper" aria-label="مراحل التسجيل"><div class="progress-track"><span id="progress-fill"></span></div><ol>
-<li class="step active" data-step-indicator="0"><span>١</span><small>نبذة وأهداف المدرسة</small></li>
-<li class="step" data-step-indicator="1"><span>٢</span><small>شروط الالتحاق</small></li>
-<li class="step" data-step-indicator="2"><span>٣</span><small>البيانات الشخصية</small></li>
-<li class="step" data-step-indicator="3"><span>٤</span><small>البيانات الكنسية</small></li>
-<li class="step" data-step-indicator="4"><span>٥</span><small>البيانات الدراسية</small></li>
-<li class="step" data-step-indicator="5"><span>٦</span><small>الدراسات والخبرات</small></li>
-<li class="step" data-step-indicator="6"><span>٧</span><small>رفع الملفات</small></li>
-<li class="step" data-step-indicator="7"><span>٨</span><small>بيانات التحويل</small></li>
-<li class="step" data-step-indicator="8"><span>٩</span><small>التعهد</small></li>
-<li class="step" data-step-indicator="9"><span>١٠</span><small>مراجعة وإرسال</small></li>
-</ol><div class="step-counter"><span id="step-number">الصفحة ١ من ١٠</span><span id="progress-percent">١٠٪</span></div></nav><form id="registration-form" novalidate>
+<form id="registration-form" novalidate>
 <section class="form-step active" data-step="0">
  <section class="reference-section welcome-form-page">
   <div class="reference-section-title">نظام التسجيل الإلكتروني - مدرسة بى مينريت للألحان والطقوس الكنسية</div>
@@ -58,7 +47,7 @@
   <div class="transfer-number"><span>رقم التحويل</span><strong dir="ltr">01220540487</strong></div>
  </section>
 </section>
-<section class="form-step active" data-step="2">
+<section class="form-step" data-step="2" hidden>
  <section class="reference-section">
   <div class="reference-section-title">البيانات الشخصية</div>
   <div class="fields-grid reference-personal-grid">
@@ -151,7 +140,19 @@
  <div class="info-note warning" id="integration-notice">الإرسال الإلكتروني غير مفعّل بعد؛ لم يتم ربط Google Forms أو قاعدة بيانات. لن تُرسل بياناتك من هذه الصفحة.</div>
 </section>
 <div class="form-alert" id="form-alert" role="alert" aria-live="polite"></div><div class="form-actions"><button type="button" class="btn btn-back" id="prev-step" disabled>السابق</button><span class="secure-note">لا تُرسل بيانات فعلية قبل تفعيل الربط الآمن</span><button type="button" class="btn btn-next" id="next-step">التالي</button><button type="submit" class="btn btn-submit" id="submit-form" hidden>إرسال طلب التسجيل</button></div>
-</form></div>
+<nav class="stepper" aria-label="مراحل التسجيل"><div class="progress-track"><span id="progress-fill"></span></div><ol>
+<li class="step active" data-step-indicator="0"><span>١</span><small>نبذة وأهداف المدرسة</small></li>
+<li class="step" data-step-indicator="1"><span>٢</span><small>شروط الالتحاق</small></li>
+<li class="step" data-step-indicator="2"><span>٣</span><small>البيانات الشخصية</small></li>
+<li class="step" data-step-indicator="3"><span>٤</span><small>البيانات الكنسية</small></li>
+<li class="step" data-step-indicator="4"><span>٥</span><small>البيانات الدراسية</small></li>
+<li class="step" data-step-indicator="5"><span>٦</span><small>الدراسات والخبرات</small></li>
+<li class="step" data-step-indicator="6"><span>٧</span><small>رفع الملفات</small></li>
+<li class="step" data-step-indicator="7"><span>٨</span><small>بيانات التحويل</small></li>
+<li class="step" data-step-indicator="8"><span>٩</span><small>التعهد</small></li>
+<li class="step" data-step-indicator="9"><span>١٠</span><small>مراجعة وإرسال</small></li>
+</ol><div class="step-counter"><span id="step-number">الصفحة ١ من ١٠</span><span id="progress-percent">١٠٪</span></div></nav>
+ </form></div>
 
 
 </main><footer class="site-footer">مدرسة بي مينزيت للألحان والطقوس الكنسية <span>✝</span> نظام التسجيل الإلكتروني</footer></div></body></html>
