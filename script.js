@@ -46,6 +46,66 @@ if(nationalIdInput&&birthDateInput){
 let verifiedNationalId="",verifiedNationalIdFile=null;
 const birthCertificateInput=form.elements.birthCertificate;
 const ocrStatus=document.getElementById("national-id-ocr-status");
+const filePreflightList=document.getElementById("file-preflight-list");
+const uploadInputs=[...form.querySelectorAll("input[type=file]")];
+const allowedFileTypes={
+ profilePhoto:["image/jpeg","image/png","image/webp"],
+ birthCertificate:["image/jpeg","image/png","image/webp","application/pdf"],
+ otherFiles:["image/jpeg","image/png","image/webp","application/pdf"],
+ paymentReceipt:["image/jpeg","image/png","image/webp","application/pdf"]
+};
+function getFileExtension(name){return String(name).toLowerCase().split(".").pop();}
+async function inspectFile(file,inputName){
+ const allowed=allowedFileTypes[inputName]||[];
+ const extension=getFileExtension(file.name);
+ const allowedExtensions=["jpg","jpeg","png","webp","pdf"];
+ if(!allowedExtensions.includes(extension)||!allowed.includes(file.type)){
+  return {ok:false,message:"نوع الملف غير مسموح أو لا يتطابق مع امتداده."};
+ }
+ if(file.size===0||file.size>5*1024*1024){
+  return {ok:false,message:file.size===0?"الملف فارغ.":"حجم الملف أكبر من 5MB."};
+ }
+ const bytes=new Uint8Array(await file.slice(0,12).arrayBuffer());
+ const isJpeg=bytes[0]===0xff&&bytes[1]===0xd8&&bytes[2]===0xff;
+ const isPng=bytes.length>=8&&[137,80,78,71,13,10,26,10].every((v,i)=>bytes[i]===v);
+ const isWebp=bytes.length>=12&&String.fromCharCode(...bytes.slice(0,4))==="RIFF"&&String.fromCharCode(...bytes.slice(8,12))==="WEBP";
+ const isPdf=bytes.length>=5&&String.fromCharCode(...bytes.slice(0,5))==="%PDF-";
+ const signatureOk=(extension==="jpg"||extension==="jpeg")?isJpeg:extension==="png"?isPng:extension==="webp"?isWebp:extension==="pdf"?isPdf:false;
+ if(!signatureOk)return {ok:false,message:"محتوى الملف لا يطابق نوعه المعلن؛ تم رفضه."};
+ return {ok:true,message:"اجتاز فحص النوع والتوقيع والحجم الأولي."};
+}
+async function validateAllUploads(){
+ const results=[];
+ let valid=true;
+ for(const input of uploadInputs){
+  const files=[...(input.files||[])];
+  if(input.name==="otherFiles"&&files.length>5){
+   valid=false;results.push({name:"المرفقات الإضافية",ok:false,message:"الحد الأقصى 5 ملفات."});
+   continue;
+  }
+  for(const file of files){
+   const result=await inspectFile(file,input.name);
+   results.push({name:file.name,...result});
+   if(!result.ok)valid=false;
+  }
+ }
+ if(filePreflightList){
+  filePreflightList.replaceChildren();
+  if(!results.length){
+   const li=document.createElement("li");li.textContent="لم يتم اختيار ملفات بعد.";filePreflightList.append(li);
+  }else{
+   for(const result of results){
+    const li=document.createElement("li");
+    li.dataset.state=result.ok?"valid":"invalid";
+    li.textContent=(result.ok?"✓ ":"✕ ")+result.name+" — "+result.message;
+    filePreflightList.append(li);
+   }
+  }
+ }
+ return valid;
+}
+uploadInputs.forEach(input=>input.addEventListener("change",()=>{validateAllUploads();}));
+
 function setOcrStatus(message,state="info"){
  if(!ocrStatus)return;
  ocrStatus.textContent=message;
@@ -128,7 +188,7 @@ if(i===2){
  if(/عزبة العرب|القطاوى/.test(areaValue)){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false}
  if(!/^[+\d\s()-]{8,20}$/.test(form.elements.phone.value.trim())){say("يرجى مراجعة رقم هاتف الشماس.");form.elements.phone.focus();return false}
  for(const key of ["whatsappPhone","motherPhone","fatherPhone"]){if(!/^[+\d\s()-]{8,20}$/.test(form.elements[key].value.trim())){say("يرجى مراجعة رقم هاتف الأم والأب.");form.elements[key].focus();return false}}
-}if(i===6&&!await verifyNationalIdImage())return false;return true}
+}if(i===6&&!await validateAllUploads()){say("يوجد ملف غير صالح. راجع نتيجة فحص الملفات وأعد اختيار الملف الصحيح.");return false}if(i===6&&!await verifyNationalIdImage())return false;return true}
 const labels={fullName:"الاسم الكامل",englishName:"الاسم بالإنجليزية",copticName:"الاسم القبطي",gender:"النوع",age:"العمر",email:"البريد الإلكتروني",nationalId:"الرقم القومي",phone:"رقم هاتف الشماس",whatsappPhone:"رقم هاتف واتس الشماس",motherPhone:"رقم هاتف الأم",fatherPhone:"رقم هاتف الأب",birthDate:"تاريخ الميلاد",governorate:"المحافظة",streetName:"رقم واسم الشارع",houseNumber:"رقم البيت",area:"المنطقة / المدينة",address:"عنوان الشارع بالتفصيل",diocese:"الإيبارشية",church:"اسم الكنيسة",confessor:"اسم أب الاعتراف",currentService:"الخدمة الحالية",educationLevel:"المرحلة الدراسية",institution:"المدرسة / الجامعة",faculty:"الكلية / التخصص",universityYear:"السنة الجامعية",studies:"الدراسات السابقة",talents:"المواهب",skills:"المهارات",chantLevel:"مستوى الألحان",copticLevel:"مستوى القبطي",ritualLevel:"مستوى الطقس"}
 function review(){const box=document.getElementById("review-summary");box.replaceChildren();Object.entries(labels).forEach(([k,l])=>{const item=document.createElement("div");item.className="review-item";const s=document.createElement("small");s.textContent=l;const b=document.createElement("strong");b.textContent=k==="nationalId"?(val(k).replace(/\d(?=\d{4})/g,"•")):val(k);item.append(s,b);box.append(item)});
 for(const [id,key] of [["church-diocese","diocese"],["church-name","church"],["church-confessor","confessor"],["church-service","currentService"]]){const target=document.getElementById(id);if(target)target.textContent=val(key)}
