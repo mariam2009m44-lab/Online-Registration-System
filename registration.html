@@ -6,8 +6,8 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-seamless-watermark"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="script.js?v=20261120-id-ocr" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-seamless-watermark-fields"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="script.js?v=20261120-semester-classcode" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
 <header class="school-banner"><img src="https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg" alt="مدرسة بي مينزيت للألحان والطقوس الكنسية - كنيسة ماريوحنا الحبيب ببهتيم"></header>
@@ -98,6 +98,8 @@
   <label class="field"><span>اسم المدرسة / الجامعة</span><input name="institution" placeholder="اسم المؤسسة التعليمية"></label>
   <label class="field"><span>الكلية / التخصص</span><input name="faculty" placeholder="الكلية أو التخصص"></label>
   <label class="field"><span>السنة الدراسية الجامعية</span><select name="universityYear"><option value="">اختر إن وجد</option><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option><option>دراسات عليا</option></select></label>
+  <label class="field"><span>الفصل الدراسي <b>*</b></span><select name="semester" required><option value="">اختر الفصل الدراسي</option><option value="الفصل الدراسي الأول">الفصل الدراسي الأول</option><option value="الفصل الدراسي الثاني">الفصل الدراسي الثاني</option></select></label>
+  <label class="field"><span>كود الفصل <b>*</b></span><input name="classCode" required maxlength="30" placeholder="أدخل كود الفصل"></label>
  </div></section>
 </section>
 <section class="form-step" data-step="5" hidden>
