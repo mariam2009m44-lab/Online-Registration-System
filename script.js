@@ -61,7 +61,7 @@ if(nationalIdFileInput) nationalIdFileInput.addEventListener("change",()=>{
  setOcrStatus(file?"تم اختيار الصورة. اضغط «التالي» لقراءة الرقم ومطابقته.":"لم يتم اختيار صورة البطاقة.","info");
 });
 async function verifyNationalIdImage(){
- const entered=toWesternDigits(nationalIdInput.value).replace(/\\D/g,"");
+ const entered=toWesternDigits(nationalIdInput.value).replace(/\D/g,"");
  const file=nationalIdFileInput&&nationalIdFileInput.files&&nationalIdFileInput.files[0];
  if(!file){setOcrStatus("ارفع صورة بطاقة الرقم القومي أولاً.","error");say("صورة بطاقة الرقم القومي مطلوبة للمطابقة.");return false;}
  if(!file.type.startsWith("image/")){setOcrStatus("الملف المختار ليس صورة مدعومة. استخدم JPG أو PNG.","error");say("يرجى رفع صورة واضحة بصيغة JPG أو PNG.");return false;}
@@ -75,8 +75,8 @@ async function verifyNationalIdImage(){
   await worker.setParameters({tessedit_char_whitelist:"0123456789",tessedit_pageseg_mode:"6"});
   const result=await worker.recognize(file);
   const recognized=String(result.data.text||"");
-  const matches=recognized.match(/(?:\\d[\\s\\r\\n-]*){14}/g)||[];
-  const candidates=matches.map(value=>value.replace(/\\D/g,"")).filter(value=>value.length===14);
+  const matches=recognized.match(/(?:\d[\s\r\n-]*){14}/g)||[];
+  const candidates=matches.map(value=>value.replace(/\D/g,"")).filter(value=>value.length===14);
   const confidence=Number(result.data.confidence||0);
   if(confidence<55||candidates.length===0){
    setOcrStatus("لم نتمكن من قراءة الرقم بوضوح. ارفع صورة أوضح ومستقيمة يظهر فيها الرقم بالكامل.","error");
