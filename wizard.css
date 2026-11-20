@@ -505,3 +505,27 @@ body.registration-app{
     grid-template-columns:20px minmax(68px,.8fr) minmax(90px,1.2fr);
   }
 }
+
+/* Original school banner uploaded to this repository */
+.school-banner{
+  width:100%;
+  margin:0 auto 16px;
+  padding:0;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #e3dada;
+  border-radius:10px;
+  box-shadow:0 4px 16px rgba(55,20,24,.06);
+  line-height:0;
+}
+.school-banner img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+}
+@media(max-width:620px){
+ .school-banner{margin-bottom:10px;border-radius:7px}
+}
