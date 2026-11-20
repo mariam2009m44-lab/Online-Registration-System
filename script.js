@@ -175,20 +175,37 @@ async function verifyNationalIdImage(){
   if(worker){try{await worker.terminate()}catch(_){}}
  }
 }
-async function validate(i){for(const e of steps[i].querySelectorAll("input[required],select[required],textarea[required]")){if(e.type==="checkbox"&&!e.checked){say("يرجى الموافقة على التعهد والإقرار للمتابعة.");e.focus();return false}if(e.type!=="checkbox"&&!e.value.trim()){say("يرجى استكمال الحقول الإجبارية قبل الانتقال.");e.focus();return false}if(!e.checkValidity()){say(e.type==="email"?"يرجى إدخال بريد إلكتروني صحيح.":"يرجى مراجعة البيانات المدخلة.");e.focus();return false}}
-if(i===2){
- const id=toWesternDigits(form.elements.nationalId.value.trim());
- if(!/^\d{14}$/.test(id)){say("الرقم القومي يجب أن يتكون من 14 رقمًا.");form.elements.nationalId.focus();return false}
- const idDate=getBirthDateFromNationalId(id);
- if(!idDate){say("الرقم القومي غير صحيح أو تاريخ الميلاد الموجود بداخله غير صالح.");form.elements.nationalId.focus();return false}
- if(form.elements.birthDate.value!==idDate){say("تاريخ الميلاد لا يطابق تاريخ الميلاد المسجل داخل الرقم القومي.");form.elements.birthDate.focus();return false}
- if(!form.elements.email.checkValidity()){say("يرجى إدخال بريد إلكتروني صحيح.");form.elements.email.focus();return false}
- if(Number(form.elements.age.value)<7){say("يشترط ألا يقل عمر المتقدم عن 7 سنوات.");form.elements.birthDate.focus();return false}
- const areaValue=form.elements.area.value.trim();
- if(/عزبة العرب|القطاوى/.test(areaValue)){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false}
- if(!/^[+\d\s()-]{8,20}$/.test(form.elements.phone.value.trim())){say("يرجى مراجعة رقم هاتف الشماس.");form.elements.phone.focus();return false}
- for(const key of ["whatsappPhone","motherPhone","fatherPhone"]){if(!/^[+\d\s()-]{8,20}$/.test(form.elements[key].value.trim())){say("يرجى مراجعة رقم هاتف الأم والأب.");form.elements[key].focus();return false}}
-}if(i===6&&!await validateAllUploads()){say("يوجد ملف غير صالح. راجع نتيجة فحص الملفات وأعد اختيار الملف الصحيح.");return false}if(i===6&&!await verifyNationalIdImage())return false;return true}
+async function validate(i){
+ for(const e of steps[i].querySelectorAll("input[required],select[required],textarea[required]")){
+  if(e.type==="checkbox"&&!e.checked){say("يرجى الموافقة على التعهد والإقرار للمتابعة.");e.focus();return false;}
+  if(e.type!=="checkbox"&&!String(e.value||"").trim()){say("يرجى استكمال الحقول الإجبارية قبل الانتقال.");e.focus();return false;}
+  if(!e.checkValidity()){say(e.type==="email"?"يرجى إدخال بريد إلكتروني صحيح.":"يرجى مراجعة البيانات المدخلة.");e.focus();return false;}
+ }
+ if(i===2){
+  const fullName=form.elements.fullName.value.trim().replace(/\s+/g," ");
+  const nameParts=fullName.split(" ").filter(Boolean);
+  if(nameParts.length<2||nameParts.length>3){say("يرجى إدخال اسمين أو ثلاثة أسماء فقط، دون كتابة الاسم الرباعي أو الخماسي بالكامل.");form.elements.fullName.focus();return false;}
+  const id=toWesternDigits(form.elements.nationalId.value.trim()).replace(/\s/g,"");
+  if(!/^\d{14}$/.test(id)){say("الرقم القومي يجب أن يتكون من 14 رقمًا.");form.elements.nationalId.focus();return false;}
+  const idDate=getBirthDateFromNationalId(id);
+  if(!idDate){say("الرقم القومي غير صحيح أو تاريخ الميلاد الموجود بداخله غير صالح.");form.elements.nationalId.focus();return false;}
+  if(form.elements.birthDate.value!==idDate){say("تاريخ الميلاد لا يطابق تاريخ الميلاد المسجل داخل الرقم القومي.");form.elements.birthDate.focus();return false;}
+  const age=Number(form.elements.age.value);
+  if(!Number.isFinite(age)||age<7){say("يشترط ألا يقل عمر المتقدم عن 7 سنوات.");form.elements.birthDate.focus();return false;}
+  if(age>120){say("يرجى مراجعة تاريخ الميلاد.");form.elements.birthDate.focus();return false;}
+  if(/عزبة العرب|القطاوى/.test(form.elements.area.value.trim())){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false;}
+  const egyptianPhone=/^(?:01[0125]\d{8}|\+201[0125]\d{8}|201[0125]\d{8})$/;
+  for(const key of ["phone","whatsappPhone","motherPhone","fatherPhone"]){
+   const phone=toWesternDigits(form.elements[key].value).replace(/[\s()-]/g,"");
+   if(!egyptianPhone.test(phone)){say("يرجى إدخال رقم هاتف مصري صحيح يبدأ بـ 010 أو 011 أو 012 أو 015.");form.elements[key].focus();return false;}
+  }
+ }
+ if(i===6){
+  if(!await validateAllUploads()){say("يوجد ملف غير صالح. راجع نتيجة فحص الملفات وأعد اختيار الملف الصحيح.");return false;}
+  if(!await verifyNationalIdImage())return false;
+ }
+ return true;
+}
 const labels={fullName:"الاسم الكامل",englishName:"الاسم بالإنجليزية",copticName:"الاسم القبطي",gender:"النوع",age:"العمر",email:"البريد الإلكتروني",nationalId:"الرقم القومي",phone:"رقم هاتف الشماس",whatsappPhone:"رقم هاتف واتس الشماس",motherPhone:"رقم هاتف الأم",fatherPhone:"رقم هاتف الأب",birthDate:"تاريخ الميلاد",governorate:"المحافظة",streetName:"رقم واسم الشارع",houseNumber:"رقم البيت",area:"المنطقة / المدينة",address:"عنوان الشارع بالتفصيل",diocese:"الإيبارشية",church:"اسم الكنيسة",confessor:"اسم أب الاعتراف",currentService:"الخدمة الحالية",educationLevel:"المرحلة الدراسية",institution:"المدرسة / الجامعة",faculty:"الكلية / التخصص",universityYear:"السنة الجامعية",semester:"الفصل الدراسي",classCode:"كود الفصل",studies:"الدراسات السابقة",talents:"المواهب",skills:"المهارات",chantLevel:"مستوى الألحان",copticLevel:"مستوى القبطي",ritualLevel:"مستوى الطقس"}
 function review(){const box=document.getElementById("review-summary");box.replaceChildren();Object.entries(labels).forEach(([k,l])=>{const item=document.createElement("div");item.className="review-item";const s=document.createElement("small");s.textContent=l;const b=document.createElement("strong");b.textContent=k==="nationalId"?(val(k).replace(/\d(?=\d{4})/g,"•")):val(k);item.append(s,b);box.append(item)});
 for(const [id,key] of [["church-diocese","diocese"],["church-name","church"],["church-confessor","confessor"],["church-service","currentService"]]){const target=document.getElementById(id);if(target)target.textContent=val(key)}
@@ -198,5 +215,5 @@ next.addEventListener("click",async()=>{next.disabled=true;try{if(await validate
 prev.addEventListener("click",()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:"smooth"})}});
 indicators.forEach((e,i)=>e.addEventListener("click",()=>{if(i<current){current=i;render();window.scrollTo({top:0,behavior:"smooth"})}}));
 form.addEventListener("input",()=>alertBox.textContent="");form.addEventListener("change",()=>alertBox.textContent="");
-form.addEventListener("submit",async e=>{e.preventDefault();if(current!==9)return;const valid=await validate(9);if(!valid)return;const uploadsValid=await validateAllUploads();if(!uploadsValid){say("يوجد ملف غير صالح. ارجع إلى صفحة رفع الملفات لمراجعة النتائج.");return;}say("لم يتم إرسال الطلب: لا يوجد خادم آمن متصل بعد. فحص الملفات الحالي أولي ولا يكتشف الفيروسات. لا تُدخل بيانات أو مستندات شخصية حقيقية في هذه النسخة التجريبية.")});render();
+form.addEventListener("submit",async e=>{e.preventDefault();if(current!==9)return;const valid=await validate(9);if(!valid)return;const uploadsValid=await validateAllUploads();if(!uploadsValid){say("يوجد ملف غير صالح. ارجع إلى صفحة رفع الملفات لمراجعة النتائج.");return;}if(!await verifyNationalIdImage())return;say("اكتملت المراجعة المحلية، لكن لم يتم إرسال الطلب: لا يوجد خادم آمن متصل بعد. الفحص الحالي لا يكتشف الفيروسات. لا تُدخل بيانات أو مستندات شخصية حقيقية في هذه النسخة التجريبية.")});render();
 })();
