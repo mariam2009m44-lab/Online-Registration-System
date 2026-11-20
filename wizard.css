@@ -311,3 +311,48 @@ body.registration-app{
  .registration-center .reference-field{grid-template-columns:22px minmax(72px,.8fr) minmax(90px,1.2fr)}
  .stat-grid{grid-template-columns:1fr 1fr}
 }
+
+/* Form-only page: centered registration experience */
+.form-only-layout{
+  display:block!important;
+  width:min(100% - 36px,980px)!important;
+  max-width:980px!important;
+  margin:18px auto 22px!important;
+}
+.form-only-layout .registration-center{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 auto!important;
+}
+.form-only-layout .intro-card{
+  padding:22px 25px;
+  margin-bottom:13px;
+}
+.form-only-layout .intro-card h1{font-size:24px}
+.form-only-layout .stepper{padding:15px 18px 10px;margin-bottom:13px}
+.form-only-layout .form-step{padding:20px}
+.form-only-layout .reference-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.form-only-layout .reference-section{height:100%}
+.form-only-layout .reference-field{
+  grid-template-columns:32px minmax(95px,.85fr) minmax(125px,1.15fr);
+  min-height:62px;
+}
+.form-only-layout .church-fields .reference-field{min-height:68px}
+.form-only-layout .fields-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.form-only-layout .form-actions{position:sticky;bottom:8px}
+@media(max-width:820px){
+ .form-only-layout .reference-columns{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+ .form-only-layout{width:calc(100% - 14px)!important;margin:9px auto 14px!important}
+ .form-only-layout .intro-card{padding:15px 13px}
+ .form-only-layout .intro-card h1{font-size:18px}
+ .form-only-layout .intro-card p{font-size:10px}
+ .form-only-layout .stepper{padding:10px 5px 8px}
+ .form-only-layout .form-step{padding:13px 9px}
+ .form-only-layout .reference-columns{grid-template-columns:1fr}
+ .form-only-layout .reference-field{grid-template-columns:25px minmax(76px,.82fr) minmax(100px,1.18fr)}
+ .form-only-layout .fields-grid{grid-template-columns:1fr}
+ .form-only-layout .form-actions{bottom:5px}
+}
