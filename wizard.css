@@ -544,3 +544,59 @@ body.registration-app,
 .registration-app textarea::placeholder{
   font-family:"Noto Naskh Arabic","Noto Sans Coptic",serif;
 }
+
+/* Faithful center-column registration layout from the supplied reference */
+.form-only-layout{width:min(100% - 28px,940px)!important;max-width:940px!important;margin:14px auto 22px!important}
+.form-only-layout .registration-center{width:100%!important;max-width:100%!important}
+.reference-title{width:100%;margin:0 auto 9px;padding:7px 16px;background:linear-gradient(100deg,#65151d,#8b202a,#65151d);border-radius:9px;color:#fff;text-align:center;font-family:"Noto Sans Coptic","Noto Naskh Arabic",serif;font-size:clamp(17px,2.2vw,26px);font-weight:700;letter-spacing:.3px;line-height:1.5;box-shadow:0 2px 5px #00000012}
+.reference-intro{margin:0 0 10px!important;padding:9px 14px!important;border:1px solid #d9c6c7!important;border-radius:8px!important;border-top:1px solid #d9c6c7!important;text-align:center}
+.reference-intro h1{margin:0!important;font-size:17px!important;color:#6e1a24!important}
+.form-only-layout .stepper{padding:12px 14px 8px;margin-bottom:10px;border-radius:8px}
+.form-only-layout .stepper ol{grid-template-columns:repeat(6,minmax(0,1fr));gap:3px}
+.form-only-layout .step>span{width:29px;height:29px;font-size:14px}
+.form-only-layout .step small{font-size:10px;line-height:1.45}
+.form-only-layout .progress-track{top:27px}
+.form-only-layout .step-counter{font-size:10px;margin-top:7px;padding-top:5px}
+.form-only-layout .form-step{padding:13px;border-radius:8px}
+.form-only-layout .form-step>.reference-section{padding:9px;border-radius:8px}
+.form-only-layout .reference-section-title{min-height:33px;padding:5px 10px;border-radius:5px;font-size:14px;justify-content:center}
+.form-only-layout .fields-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 13px;margin-top:12px}
+.form-only-layout .field{font-size:11px;gap:3px}
+.form-only-layout .field input,.form-only-layout .field select,.form-only-layout .field textarea{min-height:35px;padding:5px 8px;border-radius:5px;font-size:11px}
+.form-only-layout .field-wide{grid-column:span 1}
+.form-only-layout .reference-personal-grid .field-wide{grid-column:span 1}
+.form-only-layout input[readonly]{background:#f0f1f2;color:#6d6667}
+.form-only-layout .upload-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.form-only-layout .upload-card{min-height:130px;padding:13px 7px;border-radius:7px}
+.form-only-layout .upload-card strong{font-size:11px;line-height:1.5}
+.form-only-layout .upload-card small{font-size:9px}
+.form-only-layout .upload-card input{font-size:9px;max-width:100%}
+.form-only-layout .upload-intro{text-align:center;font-size:11px;color:#706566}
+.form-only-layout .form-actions{margin-top:9px;padding:8px;border-radius:7px}
+.form-only-layout .btn{min-width:95px;padding:7px 13px;border-radius:5px;font-size:11px!important}
+.form-only-layout .secure-note{font-size:9px}
+.form-only-layout .section-heading h2{font-size:16px}
+.form-only-layout .section-heading p{font-size:9px}
+.form-only-layout .review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:760px){
+ .form-only-layout .fields-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .form-only-layout .upload-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .form-only-layout .review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+ .form-only-layout{width:calc(100% - 12px)!important;margin:7px auto 14px!important}
+ .reference-title{font-size:15px;padding:6px 8px}
+ .reference-intro h1{font-size:15px!important}
+ .form-only-layout .stepper{padding:9px 4px 6px}
+ .form-only-layout .stepper ol{gap:1px}
+ .form-only-layout .step>span{width:25px;height:25px;font-size:12px}
+ .form-only-layout .step small{font-size:8px;line-height:1.35}
+ .form-only-layout .progress-track{top:22px}
+ .form-only-layout .fields-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .form-only-layout .field{font-size:10px}
+ .form-only-layout .field input,.form-only-layout .field select,.form-only-layout .field textarea{font-size:10px;min-height:34px}
+ .form-only-layout .upload-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .form-only-layout .review-grid{grid-template-columns:1fr}
+ .form-only-layout .secure-note{display:none}
+}
+@media(max-width:350px){.form-only-layout .fields-grid{grid-template-columns:1fr}}
