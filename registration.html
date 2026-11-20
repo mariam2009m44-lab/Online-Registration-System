@@ -6,7 +6,7 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-id-ocr"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-file-preflight"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="script.js?v=20261120-id-ocr" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
@@ -120,7 +120,12 @@
   <p id="national-id-ocr-status" class="ocr-status" role="status" aria-live="polite">ستتم مطابقة الرقم القومي المكتوب مع الرقم المستخرج من شهادة الميلاد قبل متابعة التسجيل.</p>
   <label class="upload-card"><span class="upload-symbol">▤</span><strong>أخرى (شهادات، خطابات...)</strong><small>مستندات إضافية إن وجدت</small><input type="file" name="otherFiles" accept="image/*,.pdf" multiple></label>
  </div>
- <div class="info-note warning">اختيار الملفات هنا للمعاينة داخل النموذج فقط. لم يتم إعداد تخزين آمن أو ربط رفع الملفات بعد.</div>
+ <section class="file-preflight" id="file-preflight" aria-live="polite">
+  <h3>فحص الملفات قبل المتابعة</h3>
+  <p>سيتم التحقق مبدئيًا من نوع كل ملف وتوقيعه وحجمه. هذا الفحص لا يكتشف جميع الفيروسات؛ يلزم فحص أمني على خادم موثوق قبل اعتماد أي ملف.</p>
+  <ul id="file-preflight-list"><li>لم يتم اختيار ملفات بعد.</li></ul>
+ </section>
+ <div class="info-note warning">هذه النسخة لا ترفع الملفات إلى خادم ولا تخزنها بأمان. لا تستخدم بيانات أو مستندات شخصية حقيقية قبل تفعيل الخادم الآمن وفحص مضاد للفيروسات.</div>
 </section>
 <section class="form-step" data-step="7" hidden>
  <div class="section-heading"><span class="section-icon">٨</span><div><h2>بيانات الاشتراك والتحويل</h2><p>Payment Information</p></div></div>
