@@ -616,3 +616,12 @@ body.registration-app,
 .reference-personal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:900px){.reference-personal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.reference-personal-grid{grid-template-columns:1fr}.page-title{font-size:17px}.goal-list li,.condition-list li,.page-copy{font-size:12px}.transfer-number{padding:11px}.transfer-number strong{font-size:17px}}
+
+/* Ten-step progress navigation */
+.stepper ol{grid-template-columns:repeat(10,minmax(0,1fr))}
+.stepper .step small{font-size:10px;line-height:1.35}
+@media(max-width:760px){
+ .stepper{overflow-x:auto}
+ .stepper ol{grid-template-columns:repeat(10,minmax(66px,1fr));min-width:660px}
+ .stepper .step small{font-size:9px}
+}
