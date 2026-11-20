@@ -65,7 +65,7 @@ async function verifyNationalIdImage(){
  const file=birthCertificateInput&&birthCertificateInput.files&&birthCertificateInput.files[0];
  if(!file){setOcrStatus("ارفع صورة شهادة الميلاد أولاً.","error");say("شهادة الميلاد مطلوبة لمطابقة الرقم القومي.");return false;}
  if(!file.type.startsWith("image/")&&file.type!=="application/pdf"&&!file.name.toLowerCase().endsWith(".pdf")){setOcrStatus("نوع الملف غير مدعوم. استخدم صورة JPG أو PNG أو ملف PDF.","error");say("يرجى رفع شهادة ميلاد واضحة بصيغة JPG أو PNG أو PDF.");return false;}
- if(file.size>5*1024*1024){setOcrStatus("حجم الصورة أكبر من 5MB.","error");say("حجم صورة البطاقة يجب ألا يتجاوز 5MB.");return false;}
+ if(file.size>5*1024*1024){setOcrStatus("حجم شهادة الميلاد أكبر من 5MB.","error");say("يجب ألا يتجاوز حجم شهادة الميلاد 5MB.");return false;}
  if(verifiedNationalId===entered&&verifiedNationalIdFile===file)return true;
  if(!window.Tesseract){setOcrStatus("تعذر تحميل أداة قراءة الصورة. تحقق من اتصال الإنترنت ثم أعد المحاولة.","error");say("تعذر تشغيل قراءة الصورة. تحقق من الإنترنت وحاول مرة أخرى.");return false;}
  let worker;
@@ -96,7 +96,7 @@ async function verifyNationalIdImage(){
    return false;
   }
   if(!candidates.includes(entered)){
-   setOcrStatus("الرقم المستخرج من الصورة لا يطابق الرقم المكتوب. راجع الرقم أو أعد رفع الصورة الصحيحة.","error");
+   setOcrStatus("الرقم المستخرج من شهادة الميلاد لا يطابق الرقم المكتوب. راجع الرقم أو أعد رفع الشهادة الصحيحة.","error");
    say("الرقم القومي المكتوب لا يطابق الرقم الموجود في شهادة الميلاد.");
    return false;
   }
@@ -105,7 +105,7 @@ async function verifyNationalIdImage(){
   return true;
  }catch(error){
   console.error("National ID OCR failed:",error);
-  setOcrStatus("حدث خطأ أثناء قراءة الصورة. جرّب صورة أوضح أو أعد المحاولة لاحقاً.","error");
+  setOcrStatus("حدث خطأ أثناء قراءة شهادة الميلاد. جرّب صورة أوضح أو أعد المحاولة لاحقاً.","error");
   say("حدث خطأ أثناء قراءة شهادة الميلاد. حاول مرة أخرى.");
   return false;
  }finally{
