@@ -6,7 +6,9 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-ten-pages"><script src="script.js?v=20261120-ten-pages" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-ten-pages"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+<script src="script.js?v=20261120-ten-pages" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
 <header class="school-banner"><img src="https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg" alt="مدرسة بي مينزيت للألحان والطقوس الكنسية - كنيسة ماريوحنا الحبيب ببهتيم"></header>
@@ -116,10 +118,15 @@
  <div class="upload-grid reference-upload-grid">
   <label class="upload-card"><span class="upload-symbol">▧</span><strong>الصورة الشخصية (4×6)</strong><small>صورة واضحة للمتقدم</small><input type="file" name="profilePhoto" accept="image/*"></label>
   <label class="upload-card"><span class="upload-symbol">▤</span><strong>الرقم القومي (صورة أو PDF)</strong><small>صورة واضحة للرقم القومي</small><input type="file" name="nationalIdFile" accept="image/*,.pdf"></label>
-  <label class="upload-card"><span class="upload-symbol">▤</span><strong>شهادة الميلاد (صورة أو PDF)</strong><small>صورة واضحة لشهادة الميلاد</small><input type="file" name="birthCertificate" accept="image/*,.pdf"></label>
+  <label class="upload-card"><span class="upload-symbol">▤</span><strong>شهادة الميلاد (صورة أو PDF) <b>*</b></strong><small>ارفع شهادة واضحة يظهر بها الرقم القومي</small><input type="file" name="birthCertificate" accept="image/*,.pdf" required></label>
   <label class="upload-card"><span class="upload-symbol">▤</span><strong>أخرى (شهادات، خطابات...)</strong><small>مستندات إضافية إن وجدت</small><input type="file" name="otherFiles" accept="image/*,.pdf" multiple></label>
  </div>
- <div class="info-note warning">اختيار الملفات هنا للمعاينة داخل النموذج فقط. لم يتم إعداد تخزين آمن أو ربط رفع الملفات بعد.</div>
+ <section class="id-match-panel" id="id-match-panel" aria-live="polite" aria-atomic="true">
+  <h3>مطابقة الرقم القومي مع شهادة الميلاد</h3>
+  <p id="id-match-status">ارفع شهادة الميلاد لبدء فحص الرقم القومي تلقائيًا.</p>
+  <small id="id-match-detail">تتم قراءة الصورة داخل متصفحك، ولا يتم إرسال ملف الشهادة إلى خدمة OCR خارجية.</small>
+ </section>
+ <div class="info-note warning">المطابقة آلية وقد تتأثر بجودة الصورة. لن يُسمح بالمتابعة إلا بعد قراءة رقم مطابق. لم يتم إعداد تخزين آمن لإرسال الملفات أو الطلبات بعد.</div>
 </section>
 <section class="form-step" data-step="7" hidden>
  <div class="section-heading"><span class="section-icon">٨</span><div><h2>بيانات الاشتراك والتحويل</h2><p>Payment Information</p></div></div>
