@@ -43,7 +43,64 @@ if(nationalIdInput&&birthDateInput){
  });
 }
 
-function validate(i){for(const e of steps[i].querySelectorAll("input[required],select[required],textarea[required]")){if(e.type==="checkbox"&&!e.checked){say("يرجى الموافقة على التعهد والإقرار للمتابعة.");e.focus();return false}if(e.type!=="checkbox"&&!e.value.trim()){say("يرجى استكمال الحقول الإجبارية قبل الانتقال.");e.focus();return false}if(!e.checkValidity()){say(e.type==="email"?"يرجى إدخال بريد إلكتروني صحيح.":"يرجى مراجعة البيانات المدخلة.");e.focus();return false}}
+let verifiedNationalId="",verifiedNationalIdFile=null;
+const nationalIdFileInput=form.elements.nationalIdFile;
+const ocrStatus=document.getElementById("national-id-ocr-status");
+function setOcrStatus(message,state="info"){
+ if(!ocrStatus)return;
+ ocrStatus.textContent=message;
+ ocrStatus.dataset.state=state;
+}
+if(nationalIdInput) nationalIdInput.addEventListener("input",()=>{
+ verifiedNationalId="";verifiedNationalIdFile=null;
+ setOcrStatus("تم تغيير الرقم المكتوب. ستتم إعادة المطابقة عند المتابعة.","info");
+});
+if(nationalIdFileInput) nationalIdFileInput.addEventListener("change",()=>{
+ verifiedNationalId="";verifiedNationalIdFile=null;
+ const file=nationalIdFileInput.files&&nationalIdFileInput.files[0];
+ setOcrStatus(file?"تم اختيار الصورة. اضغط «التالي» لقراءة الرقم ومطابقته.":"لم يتم اختيار صورة البطاقة.","info");
+});
+async function verifyNationalIdImage(){
+ const entered=toWesternDigits(nationalIdInput.value).replace(/\\D/g,"");
+ const file=nationalIdFileInput&&nationalIdFileInput.files&&nationalIdFileInput.files[0];
+ if(!file){setOcrStatus("ارفع صورة بطاقة الرقم القومي أولاً.","error");say("صورة بطاقة الرقم القومي مطلوبة للمطابقة.");return false;}
+ if(!file.type.startsWith("image/")){setOcrStatus("الملف المختار ليس صورة مدعومة. استخدم JPG أو PNG.","error");say("يرجى رفع صورة واضحة بصيغة JPG أو PNG.");return false;}
+ if(file.size>5*1024*1024){setOcrStatus("حجم الصورة أكبر من 5MB.","error");say("حجم صورة البطاقة يجب ألا يتجاوز 5MB.");return false;}
+ if(verifiedNationalId===entered&&verifiedNationalIdFile===file)return true;
+ if(!window.Tesseract){setOcrStatus("تعذر تحميل أداة قراءة الصورة. تحقق من اتصال الإنترنت ثم أعد المحاولة.","error");say("تعذر تشغيل قراءة الصورة. تحقق من الإنترنت وحاول مرة أخرى.");return false;}
+ let worker;
+ try{
+  setOcrStatus("جارٍ قراءة الأرقام من الصورة على جهازك... قد يستغرق ذلك بعض الوقت في أول مرة.","loading");
+  worker=await window.Tesseract.createWorker("eng",1);
+  await worker.setParameters({tessedit_char_whitelist:"0123456789",tessedit_pageseg_mode:"6"});
+  const result=await worker.recognize(file);
+  const recognized=String(result.data.text||"");
+  const matches=recognized.match(/(?:\\d[\\s\\r\\n-]*){14}/g)||[];
+  const candidates=matches.map(value=>value.replace(/\\D/g,"")).filter(value=>value.length===14);
+  const confidence=Number(result.data.confidence||0);
+  if(confidence<55||candidates.length===0){
+   setOcrStatus("لم نتمكن من قراءة الرقم بوضوح. ارفع صورة أوضح ومستقيمة يظهر فيها الرقم بالكامل.","error");
+   say("تعذرت قراءة الرقم من الصورة. يرجى رفع صورة أوضح للبطاقة.");
+   return false;
+  }
+  if(!candidates.includes(entered)){
+   setOcrStatus("الرقم المستخرج من الصورة لا يطابق الرقم المكتوب. راجع الرقم أو أعد رفع الصورة الصحيحة.","error");
+   say("الرقم القومي المكتوب لا يطابق الرقم الموجود في صورة البطاقة.");
+   return false;
+  }
+  verifiedNationalId=entered;verifiedNationalIdFile=file;
+  setOcrStatus("تمت المطابقة بنجاح: الرقم الموجود في الصورة يطابق الرقم المكتوب.","success");
+  return true;
+ }catch(error){
+  console.error("National ID OCR failed:",error);
+  setOcrStatus("حدث خطأ أثناء قراءة الصورة. جرّب صورة أوضح أو أعد المحاولة لاحقاً.","error");
+  say("حدث خطأ أثناء قراءة صورة البطاقة. حاول مرة أخرى.");
+  return false;
+ }finally{
+  if(worker){try{await worker.terminate()}catch(_){}}
+ }
+}
+async function validate(i){for(const e of steps[i].querySelectorAll("input[required],select[required],textarea[required]")){if(e.type==="checkbox"&&!e.checked){say("يرجى الموافقة على التعهد والإقرار للمتابعة.");e.focus();return false}if(e.type!=="checkbox"&&!e.value.trim()){say("يرجى استكمال الحقول الإجبارية قبل الانتقال.");e.focus();return false}if(!e.checkValidity()){say(e.type==="email"?"يرجى إدخال بريد إلكتروني صحيح.":"يرجى مراجعة البيانات المدخلة.");e.focus();return false}}
 if(i===2){
  const id=toWesternDigits(form.elements.nationalId.value.trim());
  if(!/^\d{14}$/.test(id)){say("الرقم القومي يجب أن يتكون من 14 رقمًا.");form.elements.nationalId.focus();return false}
@@ -56,13 +113,13 @@ if(i===2){
  if(/عزبة العرب|القطاوى/.test(areaValue)){say("يرجى إدخال اسم المنطقة أو المدينة / المركز بشكل صحيح.");form.elements.area.focus();return false}
  if(!/^[+\d\s()-]{8,20}$/.test(form.elements.phone.value.trim())){say("يرجى مراجعة رقم هاتف الشماس.");form.elements.phone.focus();return false}
  for(const key of ["whatsappPhone","motherPhone","fatherPhone"]){if(!/^[+\d\s()-]{8,20}$/.test(form.elements[key].value.trim())){say("يرجى مراجعة رقم هاتف الأم والأب.");form.elements[key].focus();return false}}
-}return true}
+}if(i===6&&!await verifyNationalIdImage())return false;return true}
 const labels={fullName:"الاسم الكامل",englishName:"الاسم بالإنجليزية",copticName:"الاسم القبطي",gender:"النوع",age:"العمر",email:"البريد الإلكتروني",nationalId:"الرقم القومي",phone:"رقم هاتف الشماس",whatsappPhone:"رقم هاتف واتس الشماس",motherPhone:"رقم هاتف الأم",fatherPhone:"رقم هاتف الأب",birthDate:"تاريخ الميلاد",governorate:"المحافظة",streetName:"رقم واسم الشارع",houseNumber:"رقم البيت",area:"المنطقة / المدينة",address:"عنوان الشارع بالتفصيل",diocese:"الإيبارشية",church:"اسم الكنيسة",confessor:"اسم أب الاعتراف",currentService:"الخدمة الحالية",educationLevel:"المرحلة الدراسية",institution:"المدرسة / الجامعة",faculty:"الكلية / التخصص",universityYear:"السنة الجامعية",studies:"الدراسات السابقة",talents:"المواهب",skills:"المهارات",chantLevel:"مستوى الألحان",copticLevel:"مستوى القبطي",ritualLevel:"مستوى الطقس"}
-function review(){const box=document.getElementById("review-summary");box.replaceChildren();Object.entries(labels).forEach(([k,l])=>{const item=document.createElement("div");item.className="review-item";const s=document.createElement("small");s.textContent=l;const b=document.createElement("strong");b.textContent=val(k);item.append(s,b);box.append(item)});
+function review(){const box=document.getElementById("review-summary");box.replaceChildren();Object.entries(labels).forEach(([k,l])=>{const item=document.createElement("div");item.className="review-item";const s=document.createElement("small");s.textContent=l;const b=document.createElement("strong");b.textContent=k==="nationalId"?(val(k).replace(/\d(?=\d{4})/g,"•")):val(k);item.append(s,b);box.append(item)});
 for(const [id,key] of [["church-diocese","diocese"],["church-name","church"],["church-confessor","confessor"],["church-service","currentService"]]){const target=document.getElementById(id);if(target)target.textContent=val(key)}
 const files=[...form.querySelectorAll('input[type="file"]')].flatMap(e=>[...e.files].map(f=>f.name));if(files.length){const item=document.createElement("div");item.className="review-item";item.innerHTML="<small>الملفات المختارة</small>";const b=document.createElement("strong");b.textContent=files.join("، ");item.append(b);box.append(item)}}
 function render(){steps.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle("active",i===current)});indicators.forEach((e,i)=>{e.classList.toggle("active",i===current);e.classList.toggle("done",i<current)});const p=Math.round((current+1)/steps.length*100);progress.style.width=(current/(steps.length-1)*82)+"%";document.getElementById("step-number").textContent="الصفحة "+digits(current+1)+" من "+digits(steps.length);document.getElementById("progress-percent").textContent=digits(p)+"٪";prev.disabled=current===0;next.hidden=current===steps.length-1;submit.hidden=current!==steps.length-1;if(current===9)review();alertBox.textContent=""}
-next.addEventListener("click",()=>{if(validate(current)&&current<steps.length-1){current++;render();window.scrollTo({top:0,behavior:"smooth"})}});
+next.addEventListener("click",async()=>{next.disabled=true;try{if(await validate(current)&&current<steps.length-1){current++;render();window.scrollTo({top:0,behavior:"smooth"})}}finally{next.disabled=false}});
 prev.addEventListener("click",()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:"smooth"})}});
 indicators.forEach((e,i)=>e.addEventListener("click",()=>{if(i<current){current=i;render();window.scrollTo({top:0,behavior:"smooth"})}}));
 form.addEventListener("input",()=>alertBox.textContent="");form.addEventListener("change",()=>alertBox.textContent="");
