@@ -6,7 +6,7 @@
 <title>استمارة التسجيل الإلكتروني | مدرسة بي مينزيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Coptic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="wizard.css?v=20261120-ten-pages"><script src="script.js?v=20261120-ten-pages" defer></script>
+<link rel="stylesheet" href="wizard.css?v=20261120-id-ocr"><script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script><script src="script.js?v=20261120-id-ocr" defer></script>
 </head>
 <body class="registration-app"><div class="app-shell">
 <header class="school-banner"><img src="https://raw.githubusercontent.com/mariam2009m44-lab/Online-Registration-System/main/IMG-20261111-WA0191(1).jpg" alt="مدرسة بي مينزيت للألحان والطقوس الكنسية - كنيسة ماريوحنا الحبيب ببهتيم"></header>
@@ -112,10 +112,11 @@
 </section>
 <section class="form-step" data-step="6" hidden>
  <div class="section-heading"><span class="section-icon">٧</span><div><h2>رفع الملفات</h2><p>Documents &amp; Attachments</p></div></div>
- <p class="upload-intro">يرجى رفع الملفات المطلوبة (الحد الأقصى لكل ملف 5MB).</p>
+ <p class="upload-intro">يرجى رفع الملفات المطلوبة (الحد الأقصى لكل ملف 5MB). صورة مستند الرقم القومي مطلوبة للمطابقة التلقائية. لمن بلغ 15 عامًا: صورة البطاقة، ولمن هم أصغر: صورة شهادة الميلاد المميكنة التي يظهر بها الرقم القومي.</p>
  <div class="upload-grid reference-upload-grid">
   <label class="upload-card"><span class="upload-symbol">▧</span><strong>الصورة الشخصية (4×6)</strong><small>صورة واضحة للمتقدم</small><input type="file" name="profilePhoto" accept="image/*"></label>
-  <label class="upload-card"><span class="upload-symbol">▤</span><strong>الرقم القومي (صورة أو PDF)</strong><small>صورة واضحة للرقم القومي</small><input type="file" name="nationalIdFile" accept="image/*,.pdf"></label>
+  <label class="upload-card national-id-upload"><span class="upload-symbol">▤</span><strong>مستند الرقم القومي <b>*</b></strong><small>لمن بلغ 15 عامًا: صورة البطاقة. ولمن هم أصغر: صورة شهادة الميلاد المميكنة. يجب أن يظهر الرقم كاملًا (JPG أو PNG، بحد أقصى 5MB)</small><input id="national-id-file" type="file" name="nationalIdFile" accept="image/jpeg,image/png,image/webp" required></label>
+  <p id="national-id-ocr-status" class="ocr-status" role="status" aria-live="polite">ستتم مطابقة الرقم القومي المكتوب مع الرقم المستخرج من صورة البطاقة أو شهادة الميلاد قبل متابعة التسجيل.</p>
   <label class="upload-card"><span class="upload-symbol">▤</span><strong>شهادة الميلاد (صورة أو PDF)</strong><small>صورة واضحة لشهادة الميلاد</small><input type="file" name="birthCertificate" accept="image/*,.pdf"></label>
   <label class="upload-card"><span class="upload-symbol">▤</span><strong>أخرى (شهادات، خطابات...)</strong><small>مستندات إضافية إن وجدت</small><input type="file" name="otherFiles" accept="image/*,.pdf" multiple></label>
  </div>
