@@ -136,23 +136,31 @@ async function verifyNationalIdImage(){
   setOcrStatus("جارٍ قراءة الأرقام من الصورة على جهازك... قد يستغرق ذلك بعض الوقت في أول مرة.","loading");
   worker=await window.Tesseract.createWorker("eng",1);
   await worker.setParameters({tessedit_char_whitelist:"0123456789",tessedit_pageseg_mode:"6"});
-  let ocrSource=file;
+  const ocrSources=[];
   if(file.type==="application/pdf"||file.name.toLowerCase().endsWith(".pdf")){
    if(!window.pdfjsLib)throw new Error("تعذر تحميل قارئ PDF. جرّب رفع صورة JPG أو PNG.");
    window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
    const pdf=await window.pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
-   const page=await pdf.getPage(1);
-   const viewport=page.getViewport({scale:2.5});
-   const canvas=document.createElement("canvas");
-   canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
-   await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
-   ocrSource=canvas;
+   if(pdf.numPages>10)throw new Error("ملف الشهادة يحتوي على أكثر من 10 صفحات. ارفع نسخة الشهادة المطلوبة فقط.");
+   for(let pageNumber=1;pageNumber<=pdf.numPages;pageNumber++){
+    const page=await pdf.getPage(pageNumber);
+    const viewport=page.getViewport({scale:2.5});
+    const canvas=document.createElement("canvas");
+    canvas.width=Math.ceil(viewport.width);canvas.height=Math.ceil(viewport.height);
+    await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
+    ocrSources.push(canvas);
+   }
+  }else{ocrSources.push(file);}
+  const recognizedParts=[];
+  let confidence=0;
+  for(const source of ocrSources){
+   const result=await worker.recognize(source);
+   recognizedParts.push(String(result.data.text||""));
+   confidence=Math.max(confidence,Number(result.data.confidence||0));
   }
-  const result=await worker.recognize(ocrSource);
-  const recognized=String(result.data.text||"");
-  const matches=recognized.match(/(?:\d[\s\r\n-]*){14}/g)||[];
-  const candidates=matches.map(value=>value.replace(/\D/g,"")).filter(value=>value.length===14);
-  const confidence=Number(result.data.confidence||0);
+  const recognized=recognizedParts.join("\\n");
+  const matches=recognized.match(/(?:\\d[\\s\\r\\n-]*){14}/g)||[];
+  const candidates=matches.map(value=>value.replace(/\\D/g,"")).filter(value=>value.length===14);
   if(confidence<55||candidates.length===0){
    setOcrStatus("لم نتمكن من قراءة الرقم بوضوح. ارفع صورة أوضح ومستقيمة يظهر فيها الرقم بالكامل.","error");
    say("تعذرت قراءة الرقم من شهادة الميلاد. يرجى رفع صورة أوضح.");
@@ -210,7 +218,7 @@ const labels={fullName:"الاسم الكامل",englishName:"الاسم بال�
 function review(){const box=document.getElementById("review-summary");box.replaceChildren();Object.entries(labels).forEach(([k,l])=>{const item=document.createElement("div");item.className="review-item";const s=document.createElement("small");s.textContent=l;const b=document.createElement("strong");b.textContent=k==="nationalId"?(val(k).replace(/\d(?=\d{4})/g,"•")):val(k);item.append(s,b);box.append(item)});
 for(const [id,key] of [["church-diocese","diocese"],["church-name","church"],["church-confessor","confessor"],["church-service","currentService"]]){const target=document.getElementById(id);if(target)target.textContent=val(key)}
 const files=[...form.querySelectorAll('input[type="file"]')].flatMap(e=>[...e.files].map(f=>f.name));if(files.length){const item=document.createElement("div");item.className="review-item";item.innerHTML="<small>الملفات المختارة</small>";const b=document.createElement("strong");b.textContent=files.join("، ");item.append(b);box.append(item)}}
-function render(){steps.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle("active",i===current)});indicators.forEach((e,i)=>{e.classList.toggle("active",i===current);e.classList.toggle("done",i<current)});const p=Math.round((current+1)/steps.length*100);progress.style.width=(current/(steps.length-1)*82)+"%";document.getElementById("step-number").textContent="الصفحة "+digits(current+1)+" من "+digits(steps.length);document.getElementById("progress-percent").textContent=digits(p)+"٪";prev.disabled=current===0;next.hidden=current===steps.length-1;submit.hidden=current!==steps.length-1;if(current===9)review();alertBox.textContent=""}
+function render(){steps.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle("active",i===current)});indicators.forEach((e,i)=>{e.classList.toggle("active",i===current);e.classList.toggle("done",i<current)});const p=Math.round((current+1)/steps.length*100);progress.style.width=(current/(steps.length-1)*82)+"%";document.querySelector(".step-counter")?.style.setProperty("--progress",p+"%");document.getElementById("step-number").textContent="الصفحة "+digits(current+1)+" من "+digits(steps.length);document.getElementById("progress-percent").textContent=digits(p)+"٪";prev.disabled=current===0;next.hidden=current===steps.length-1;submit.hidden=current!==steps.length-1;if(current===9)review();alertBox.textContent=""}
 next.addEventListener("click",async()=>{next.disabled=true;try{if(await validate(current)&&current<steps.length-1){current++;render();window.scrollTo({top:0,behavior:"smooth"})}}finally{next.disabled=false}});
 prev.addEventListener("click",()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:"smooth"})}});
 indicators.forEach((e,i)=>e.addEventListener("click",()=>{if(i<current){current=i;render();window.scrollTo({top:0,behavior:"smooth"})}}));
